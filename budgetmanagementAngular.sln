@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "budgetmanagementAngular", "budgetmanagementAngular.csproj", "{63F05072-1E1C-43BA-8D19-A88982973164}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63F05072-1E1C-43BA-8D19-A88982973164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F05072-1E1C-43BA-8D19-A88982973164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F05072-1E1C-43BA-8D19-A88982973164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F05072-1E1C-43BA-8D19-A88982973164}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A315FE9-0896-496F-A6C2-0EB2AE08EADF}
+	EndGlobalSection
+EndGlobal
