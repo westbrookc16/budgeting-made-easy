@@ -13,6 +13,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BudgetComponent } from './budget/budget.component';
 import { componentFactoryName } from '@angular/compiler';
 import { Component } from '@angular/core/src/metadata/directives';
+import { CategoryComponent } from './category/category.component';
+import { BudgetService } from './budget.service';
+import { CategoryService } from './category.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import { Component } from '@angular/core/src/metadata/directives';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    BudgetComponent
+    BudgetComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,7 +41,8 @@ import { Component } from '@angular/core/src/metadata/directives';
     CurrencyMaskModule
 
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  //provideBudgetServicers: [],
+  bootstrap: [AppComponent],
+  providers: [CategoryService,BudgetService]
 })
 export class AppModule { }

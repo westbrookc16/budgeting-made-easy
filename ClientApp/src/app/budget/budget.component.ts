@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Budget } from '../classes/budget';
+import { BudgetService } from '../budget.service';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-budget',
@@ -9,11 +11,14 @@ import { Budget } from '../classes/budget';
 export class BudgetComponent implements OnInit {
   currBudget: Budget = new Budget();
 
-  constructor() { }
-
+  constructor(private budgetService: BudgetService, private categoryService: CategoryService) { }
+  onCategoryChange(total: number) {
+    this.currBudget.totalSpent = total;
+    console.log("this event has run");
+  }
   ngOnInit() {
-    this.currBudget.year = 2018;    
-
+    this.currBudget.year = 2018;
+    //this.currBudget.totalSpent = this.categoryService.calcTotalSpent();
     
   }
 

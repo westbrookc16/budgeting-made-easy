@@ -33,9 +33,9 @@
 
     </tr>
     <tr><td><label for="txtIncome">Total Monthly Income</label></td><td><input type="text" currencyMask  id="txtIncome" [(ngModel)]="currBudget.income"  /></td></tr>
-    
+<tr><td>Total Spent</td><td>{{currBudget.totalSpent |currency}}</td></tr>    
 
   </table>
-  {{currBudget.income |currency}}
-
+  
+<app-category (onCategoryChange)="onCategoryChange($event)"></app-category>
 </div>
