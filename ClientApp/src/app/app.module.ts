@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import  {  CurrencyMaskModule  }  from  "ng2-currency-mask";
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -41,8 +41,7 @@ import { CategoryService } from './category.service';
     CurrencyMaskModule
 
   ],
-  //provideBudgetServicers: [],
   bootstrap: [AppComponent],
-  providers: [CategoryService,BudgetService]
+  providers: [CategoryService, BudgetService]
 })
 export class AppModule { }

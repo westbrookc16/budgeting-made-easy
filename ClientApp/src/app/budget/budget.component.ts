@@ -12,14 +12,12 @@ export class BudgetComponent implements OnInit {
   currBudget: Budget = new Budget();
 
   constructor(private budgetService: BudgetService, private categoryService: CategoryService) { }
-  onCategoryChange(total: number) {
+  categoryChange(total: number) {
     this.currBudget.totalSpent = total;
-    console.log("this event has run");
   }
   ngOnInit() {
     this.currBudget.year = 2018;
-    //this.currBudget.totalSpent = this.categoryService.calcTotalSpent();
-    
+    this.currBudget.month = new Date().getMonth() + 1;
   }
 
 }
