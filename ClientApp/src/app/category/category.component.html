@@ -1,0 +1,11 @@
+<div id="categories">
+  <table>
+    <tr><th>name</th><th>Amount</th></tr>
+    <tr *ngFor="let i of categories">
+      <td>{{i.name}}</td>
+      <td><input [(ngModel)]="i.amount" currencyMask/> </td>
+    </tr>
+
+  </table>
+<app-add-category (addCategory)="addCategory($event)"></app-add-category>
+</div>

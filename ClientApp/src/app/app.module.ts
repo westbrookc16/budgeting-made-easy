@@ -16,6 +16,7 @@ import { Component } from '@angular/core/src/metadata/directives';
 import { CategoryComponent } from './category/category.component';
 import { BudgetService } from './budget.service';
 import { CategoryService } from './category.service';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CategoryService } from './category.service';
     CounterComponent,
     FetchDataComponent,
     BudgetComponent,
-    CategoryComponent
+    CategoryComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
