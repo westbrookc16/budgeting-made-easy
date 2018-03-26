@@ -37,6 +37,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      //{ path: 'api/budget', redirectTo: '/api/budget' },
       { path: 'budget', component: BudgetComponent }
 
     ]),

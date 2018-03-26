@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace budgetmanagementAngular.models
 {
@@ -11,6 +12,7 @@ namespace budgetmanagementAngular.models
         public int month { get; set; }
         public int year { get; set; }
         public decimal totalIncome { get; set; }
+        
         public ICollection<budgetCategory> categories { get; set; }
 
     }
