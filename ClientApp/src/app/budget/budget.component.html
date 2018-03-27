@@ -32,10 +32,9 @@
       </td>
 
     </tr>
-    <tr><td><label for="txtIncome">Total Monthly Income</label></td><td><input type="text" currencyMask  id="txtIncome" [(ngModel)]="currBudget.income"  /></td></tr>
-<tr><td>Total Spent</td><td>{{currBudget.totalSpent |currency}}</td></tr>    
-
+    <tr><td><label for="txtIncome">Total Monthly Income</label></td><td><input type="text" currencyMask  id="txtIncome" [(ngModel)]="currBudget.totalIncome"  /></td></tr>
+    <tr><td>Total  Spent</td><td>{{currBudget.totalSpent |currency}}</td></tr>
   </table>
   
-<app-category (categoryChange)="categoryChange($event)"></app-category>
+
 </div>

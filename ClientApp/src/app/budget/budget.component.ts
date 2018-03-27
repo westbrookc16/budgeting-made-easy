@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Budget } from '../classes/budget';
-import { BudgetService } from '../budget.service';
-import { CategoryService } from '../category.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-budget',
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.css']
 })
-export class BudgetComponent implements OnInit {
-  currBudget: Budget = new Budget();
 
-  constructor(private budgetService: BudgetService, private categoryService: CategoryService) { }
-  categoryChange(total: number) {
-    this.currBudget.totalSpent = total;
+export class BudgetComponent  {
+  currBudget: budget;
+  
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    var url = baseUrl + 'api/budget/getbudget/5/2018';
+    console.log(url);
+    http.get<budget>(url).subscribe(result => {
+      console.log(result.month);
+      this.currBudget = result;
+      console.log(result.totalIncome);
+    }, error => console.error(error));  
   }
-  ngOnInit() {
-    this.currBudget.year = 2018;
-    this.currBudget.month = new Date().getMonth() + 1;
-  }
-
 }
