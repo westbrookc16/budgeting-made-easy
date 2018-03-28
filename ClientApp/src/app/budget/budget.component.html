@@ -3,7 +3,7 @@
     <tr>
       <td>Month</td>
       <td>
-        <select [(ngModel)]="currBudget.month" >
+        <select [(ngModel)]="currBudget.month">
           <option value="1">jan</option>
           <option value="2">Feb</option>
           <option value="3">Mar</option>
@@ -32,9 +32,9 @@
       </td>
 
     </tr>
-    <tr><td><label for="txtIncome">Total Monthly Income</label></td><td><input type="text" currencyMask  id="txtIncome" [(ngModel)]="currBudget.totalIncome"  /></td></tr>
+    <tr><td><label for="txtIncome">Total Monthly Income</label></td><td><input type="text" currencyMask id="txtIncome" [(ngModel)]="currBudget.totalIncome" /></td></tr>
     <tr><td>Total  Spent</td><td>{{currBudget.totalSpent |currency}}</td></tr>
   </table>
-  
 
+  <app-budget-category [month]="currBudget.month" [year]="currBudget.year" [budgetID]="currBudget.budgetID"></app-budget-category>
 </div>

@@ -13,7 +13,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BudgetComponent } from './budget/budget.component';
 import { componentFactoryName } from '@angular/compiler';
 import { Component } from '@angular/core/src/metadata/directives';
-import { CategoryComponent } from './category/category.component';
+import { budgetCategoryComponent } from './budgetCategory/budgetCategory.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 
 
@@ -25,7 +25,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
     CounterComponent,
     FetchDataComponent,
     BudgetComponent,
-    CategoryComponent,
+    budgetCategoryComponent,
     CategoryListComponent,
     
   ],

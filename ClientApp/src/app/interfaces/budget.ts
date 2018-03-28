@@ -1,5 +1,5 @@
 interface budget {
-  id: number;
+  budgetID: number;
   month: number;
   year: number;
   totalIncome: number;

@@ -16,12 +16,12 @@ namespace budgetmanagementAngular.Controllers
         [HttpGet("getBudget/{month}/{year}")]
         public IActionResult getBudget(int? month=3, int? year=2018)
         {
-            budget b = new budget();
-            b.id = 1;
+            budgetViewModel b = new budgetViewModel();
+            b.budgetID = 1;
             b.month = month;
             b.year = year;
             b.totalIncome = 50000;
-            b.totalSpent = 7000;
+            
             return new JsonResult(b, new JsonSerializerSettings() { Formatting = Formatting.Indented });    
         }
             }

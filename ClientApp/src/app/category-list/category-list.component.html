@@ -1,0 +1,16 @@
+<div id="categoryList" *ngIf="categories">
+  <h1>Categories for {{month}}/{{year}}</h1>
+  <table>
+    <thead>
+      <tr><td>Name</td><td>Amount</td></tr>
+
+    </thead>
+    <tbody></tbody>
+    <tr *ngFor="let i of categories">
+      <td>{{i.name}}
+      <td><input currencyMask type="text" [(ngModel)]="i.amount" /></td>
+
+    </tr>
+
+  </table>
+</div>

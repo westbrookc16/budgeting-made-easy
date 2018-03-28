@@ -7,16 +7,20 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./budget.component.css']
 })
 
-export class BudgetComponent  {
+export class BudgetComponent implements OnInit  {
   currBudget: budget;
   
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    var url = baseUrl + 'api/budget/getbudget/5/2018';
-    console.log(url);
-    http.get<budget>(url).subscribe(result => {
-      console.log(result.month);
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+    
+  }
+  ngOnInit() {
+    console.log("oninit is here.");
+    var url = this.baseUrl + 'api/budget/getbudget/5/2018';
+    
+    this.http.get<budget>(url).subscribe(result => {
+      console.log("resultMonth=" + result.month);
       this.currBudget = result;
-      console.log(result.totalIncome);
+      
     }, error => console.error(error));  
   }
 }
