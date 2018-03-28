@@ -22,7 +22,7 @@ namespace budgetmanagementAngular.Controllers
                 budgetCategoryViewModel cat = new budgetCategoryViewModel();
                 cat.name = "test " + i.ToString();
                 cat.amount = 4 * i;
-                cat.id = i;
+                cat.budgetCategoryID = i;
                 cat.budgetID = budgetID;
                 categories.Add(cat);
             }
