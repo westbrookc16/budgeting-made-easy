@@ -15,6 +15,7 @@ namespace budgetmanagementAngular.viewModels
         public int? year { get; set; }
         
         public decimal totalIncome { get; set; }
+        public decimal totalSpent { get; set; }
         
     }
 }
