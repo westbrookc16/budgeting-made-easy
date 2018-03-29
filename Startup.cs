@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using AutoMapper;
 using budgetmanagementAngular.data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,7 @@ namespace budgetmanagementAngular
             services.AddDbContext<budgetContext>(options =>
     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddAutoMapper();
             services.AddMvc();
 
             // In production, the Angular files will be served from this directory
