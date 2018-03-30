@@ -26,7 +26,7 @@ namespace budgetmanagementAngular.Controllers
         {
 
 
-            var q = from budget in db.budgets where budget.month == month && budget.year == year select new {budget.budgetID,budget.month,budget.year, totalSpent = budget.categories.Sum(p => p.amount) };
+            var q = from budget in db.budgets where budget.month == month && budget.year == year select new {budget.budgetID,budget.month,budget.year, totalSpent = budget.categories.Sum(p => p.amount), budget.totalIncome };
             //budgetViewModel b = _mapper.Map<budgetViewModel>(q.SingleOrDefault());
 
             //}

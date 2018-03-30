@@ -15,6 +15,7 @@ import { componentFactoryName } from '@angular/compiler';
 import { Component } from '@angular/core/src/metadata/directives';
 import { budgetCategoryComponent } from './budgetCategory/budgetCategory.component';
 import { CategoryListComponent } from './category-list/category-list.component';
+import { BudgetService } from './budget.service';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
     CategoryListComponent,
     
   ],
+  providers:[BudgetService],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,

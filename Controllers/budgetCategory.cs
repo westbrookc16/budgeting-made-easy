@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using budgetmanagementAngular.viewModels;
+using budgetmanagementAngular.data;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace budgetmanagementAngular.Controllers
@@ -12,22 +13,19 @@ namespace budgetmanagementAngular.Controllers
     [Route("api/[controller]")]
     public class budgetCategoryController : Controller
     {
-        // GET: api/<controller>
+        private budgetContext db;
+        public budgetCategoryController(budgetContext context)
+            {
+            db = context;
+
+            }
+    // GET: api/<controller>
         [HttpGet("getAll/{budgetID}")]
         public JsonResult getAll(int budgetID)
         {
             var categories = new List<budgetCategoryViewModel>();
-            for (int i = 0; i < 5; i++)
-            {
-                budgetCategoryViewModel cat = new budgetCategoryViewModel();
-                cat.name = "test " + i.ToString();
-                cat.amount = 4 * i;
-                cat.budgetCategoryID = i;
-                cat.budgetID = budgetID;
-                categories.Add(cat);
-            }
-            return new JsonResult(categories, new JsonSerializerSettings() { Formatting = Formatting.Indented });
-
+            var q = from c in db.budgetCategories where c.budgetID == budgetID select c;
+            return new JsonResult(q.ToList(), new JsonSerializerSettings() { Formatting = Formatting.Indented });
         }
     }
 }

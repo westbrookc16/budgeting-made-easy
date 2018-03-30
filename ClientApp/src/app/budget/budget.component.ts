@@ -1,5 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Budget } from '../classes/budget';
 import { HttpClient } from '@angular/common/http';
+import { BudgetService } from '../budget.service';
+import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-budget',
@@ -7,20 +10,29 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./budget.component.css']
 })
 
-export class BudgetComponent implements OnInit  {
-  currBudget: budget;
-  
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    
+export class BudgetComponent implements OnInit {
+  currBudget: Budget = new Budget();
+
+  constructor(private budgetService: BudgetService) {
+
+  }
+  changeBudget() {
+    this.budgetService.getBudget(this.currBudget.month, this.currBudget.year).subscribe(result => {
+      if (result != null)
+        this.currBudget = result;
+      else {
+        this.currBudget.budgetID = -1;
+        this.currBudget.totalIncome = 0;
+        this.currBudget.totalSpent = 0;
+      }
+    });
   }
   ngOnInit() {
-    console.log("oninit is here.");
-    var url = this.baseUrl + 'api/budget/getbudget/5/2018';
-    
-    this.http.get<budget>(url).subscribe(result => {
-      console.log("resultMonth=" + result.month);
-      this.currBudget = result;
-      
-    }, error => console.error(error));  
+
+
+
+
+    this.budgetService.getBudget(this.currBudget.month, this.currBudget.year).subscribe(result => { this.currBudget = result;
+  });
   }
 }

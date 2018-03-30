@@ -1,9 +1,9 @@
 <div id="budget">
-  <table *ngIf="currBudget">
+  <table>
     <tr>
       <td>Month</td>
       <td>
-        <select [(ngModel)]="currBudget.month">
+        <select [(ngModel)]="currBudget.month" (change)="changeBudget()">
           <option value="1">jan</option>
           <option value="2">Feb</option>
           <option value="3">Mar</option>
@@ -23,7 +23,7 @@
     <tr>
       <td><label for="ddlYear">Year</label></td>
       <td>
-        <select id="ddlYear" [(ngModel)]="currBudget.year">
+        <select id="ddlYear" (change)="changeBudget()" [(ngModel)]="currBudget.year">
           <option>2017</option>
           <option>2018</option>
           <option>2019</option>
