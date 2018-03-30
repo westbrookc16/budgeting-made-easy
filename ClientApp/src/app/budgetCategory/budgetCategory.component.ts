@@ -4,11 +4,13 @@ import { Input, Inject } from '@angular/core';
 import { BudgetCategory } from '../classes/BudgetCategory';
 import { HttpClient } from '@angular/common/http';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-budget-category',
   templateUrl: './budgetCategory.component.html',
-  styleUrls: ['./budgetCategory.component.css']
+  styleUrls: ['./budgetCategory.component.css'],
+  providers: [CategoryService]
 })
 export class budgetCategoryComponent implements OnInit, OnChanges {
   categories: BudgetCategory[] = [];
@@ -17,11 +19,10 @@ export class budgetCategoryComponent implements OnInit, OnChanges {
   _budgetID: number;
   @Input() set budgetID(value: number) {
     this._budgetID = value;
-    this.http.get<BudgetCategory[]>(this.baseUrl + 'api/budgetCategory/getAll/' + this._budgetID).subscribe(result => { this.categories = result; }, error => {
-      console.error(error);
-    });
+    this.catService.getBudgetCategories(this._budgetID).subscribe(result => { this.categories = result; });
+    
   };
-  constructor( @Inject('BASE_URL') private baseUrl: string, private http: HttpClient) {
+  constructor(private catService: CategoryService) {
 
   }
 
