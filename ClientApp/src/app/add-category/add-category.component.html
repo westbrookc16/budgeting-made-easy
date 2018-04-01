@@ -1,0 +1,8 @@
+<div>
+  <h1>add Category</h1>
+  <table>
+    <tr><td><label for="name">name</label></td><td><input id="name" [(ngModel)]="cat.name" /></td></tr>
+    <tr><td><label for="amount">Amount</label></td><td><input id="amount" [(ngModel)]="cat.amount" /></td></tr>
+  </table>
+  <input type="button" id="btnAdd" value="Add" (click)="add()"/>
+</div>
