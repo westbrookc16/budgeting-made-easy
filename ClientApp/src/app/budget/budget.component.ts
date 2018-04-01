@@ -3,6 +3,7 @@ import { Budget } from '../classes/budget';
 import { HttpClient } from '@angular/common/http';
 import { BudgetService } from '../budget.service';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-budget',
@@ -13,7 +14,7 @@ import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 export class BudgetComponent implements OnInit {
   currBudget: Budget = new Budget();
 
-  constructor(private budgetService: BudgetService) {
+  constructor(private budgetService: BudgetService, private catService: CategoryService) {
 
   }
   changeBudget() {
@@ -34,7 +35,9 @@ export class BudgetComponent implements OnInit {
   }
   ngOnInit() {
 
-
+    this.catService.newCat$.subscribe(result => {
+      this.currBudget.totalSpent += result.amount;
+    })
 
 
     this.budgetService.getBudget(this.currBudget.month, this.currBudget.year).subscribe(result => { this.currBudget = result;
