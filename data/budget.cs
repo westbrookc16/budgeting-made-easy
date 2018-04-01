@@ -13,19 +13,19 @@ namespace budgetmanagementAngular.data
         public int year { get; set; }
         public decimal totalIncome { get; set; }
         public DateTime? creationDate { get; set; }
-        /*public decimal getTotalSpent()
+        public decimal totalSpent
         {
-            decimal total = 0.00M;
-            if (categories != null)
-            {
+
+            get {
+                decimal total = 0.00M;
+                if (categories == null)
+                    return 0.00M;
                 foreach (var c in categories)
                 {
                     total += c.amount;
-
                 }
+                return total;
             }
-            return total;
-
-        }*/
+        }
     }
 }

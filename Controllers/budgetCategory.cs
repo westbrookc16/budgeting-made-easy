@@ -19,7 +19,29 @@ namespace budgetmanagementAngular.Controllers
             db = context;
 
             }
-    // GET: api/<controller>
+        // GET: api/<controller>
+        [HttpPost("add")]
+        public JsonResult add([FromBody]budgetCategory c) {
+            if (c.budgetCategoryID == -1) {
+                budgetCategory newCat = new budgetCategory();
+                newCat.name = c.name;
+                newCat.amount = c.amount;
+                newCat.budgetID = c.budgetID;
+                db.budgetCategories.Add(newCat);
+                db.SaveChanges();
+                return new JsonResult(newCat, new JsonSerializerSettings() { Formatting = Formatting.Indented });
+            }
+            else
+            {
+                //do an update
+                var q = from i in db.budgetCategories select i;
+                var updatedCat = q.Single();
+                updatedCat.amount = c.amount;
+                updatedCat.name = c.name;
+                db.SaveChanges();
+                return new JsonResult(updatedCat, new JsonSerializerSettings() { Formatting = Formatting.Indented });
+            }
+        }
         [HttpGet("getAll/{budgetID}")]
         public JsonResult getAll(int budgetID)
         {

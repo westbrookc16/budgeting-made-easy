@@ -11,4 +11,7 @@ export class BudgetService {
     let url = this.baseUrl + 'api/budget/getbudget/' + month + '/' + year;
     return this.http.get<Budget>(url);
   }
+  add(b: Budget) {
+    return this.http.post<Budget>(this.baseUrl + 'api/budget/add', b);
+  }
 }

@@ -14,8 +14,10 @@ import { BudgetComponent } from './budget/budget.component';
 import { componentFactoryName } from '@angular/compiler';
 import { Component } from '@angular/core/src/metadata/directives';
 import { budgetCategoryComponent } from './budgetCategory/budgetCategory.component';
-import { CategoryListComponent } from './category-list/category-list.component';
+//import { CategoryListComponent } from './category-list/category-list.component';
 import { BudgetService } from './budget.service';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { CategoryService } from './category.service';
 
 
 @NgModule({
@@ -27,10 +29,9 @@ import { BudgetService } from './budget.service';
     FetchDataComponent,
     BudgetComponent,
     budgetCategoryComponent,
-    CategoryListComponent,
-    
+    AddCategoryComponent
   ],
-  providers:[BudgetService],
+  providers: [BudgetService, CategoryService],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -46,6 +47,6 @@ import { BudgetService } from './budget.service';
 
   ],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule { }

@@ -27,6 +27,11 @@ export class BudgetComponent implements OnInit {
       }
     });
   }
+  add() {
+    this.budgetService.add(this.currBudget).subscribe(result => {
+      this.currBudget = result;
+    });
+  }
   ngOnInit() {
 
 

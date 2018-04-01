@@ -10,7 +10,7 @@ import { CategoryService } from '../category.service';
   selector: 'app-budget-category',
   templateUrl: './budgetCategory.component.html',
   styleUrls: ['./budgetCategory.component.css'],
-  providers: [CategoryService]
+  //providers: [CategoryService]
 })
 export class budgetCategoryComponent implements OnInit, OnChanges {
   categories: BudgetCategory[] = [];
@@ -27,7 +27,9 @@ export class budgetCategoryComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    
+    this.catService.newCat.subscribe(result => {
+      this.categories.push(result);
+    });
     //this.http.get<BudgetCategory[]>(this.baseUrl + 'api/budgetCategory/getAll/' + this.budgetID).subscribe(result => { this.categories = result; }, error => {
 //      console.error(error);
     //});
