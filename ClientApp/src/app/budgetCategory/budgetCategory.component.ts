@@ -40,7 +40,7 @@ export class budgetCategoryComponent implements OnInit, OnChanges {
         this.budgetID = result.budgetID;
         this.year = result.year;
         this.month = result.month;
-        this.catService.getBudgetCategories(this._budgetID).subscribe(result => {
+        this.catService.getBudgetCategories(this.budgetID).subscribe(result => {
 
           this.categories = result;
         });
