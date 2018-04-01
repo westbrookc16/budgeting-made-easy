@@ -27,7 +27,7 @@ export class budgetCategoryComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.catService.newCat.subscribe(result => {
+    this.catService.newCat$.subscribe(result => {
       this.categories.push(result);
     });
     //this.http.get<BudgetCategory[]>(this.baseUrl + 'api/budgetCategory/getAll/' + this.budgetID).subscribe(result => { this.categories = result; }, error => {
