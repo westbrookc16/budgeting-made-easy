@@ -5,6 +5,7 @@ import { BudgetCategory } from '../classes/BudgetCategory';
 import { HttpClient } from '@angular/common/http';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { CategoryService } from '../category.service';
+import { BudgetService } from '../budget.service';
 
 @Component({
   selector: 'app-budget-category',
@@ -14,20 +15,25 @@ import { CategoryService } from '../category.service';
 })
 export class budgetCategoryComponent implements OnInit, OnChanges {
   categories: BudgetCategory[] = [];
-  @Input() year: number;
-  @Input() month: number;
+  year: number;
+month: number;
   _budgetID: number;
-  @Input() set budgetID(value: number) {
-    this._budgetID = value;
-    this.catService.getBudgetCategories(this._budgetID).subscribe(result => { this.categories = result; });
+  
     
-  };
-  constructor(private catService: CategoryService) {
+    
+
+constructor(private catService: CategoryService, private budgetService: BudgetService) {
 
   }
 
   ngOnInit() {
-    this.catService.newCat$.subscribe(result => {
+    this.budgetService.currBudget$.subscribe(result => {
+      this._budgetID = result.budgetID;
+      this.year = result.year;
+      this.month = result.month;
+      this.catService.getBudgetCategories(this._budgetID);
+    });  
+  this.catService.newCat$.subscribe(result => {
       this.categories.push(result);
     });
     //this.http.get<BudgetCategory[]>(this.baseUrl + 'api/budgetCategory/getAll/' + this.budgetID).subscribe(result => { this.categories = result; }, error => {

@@ -36,6 +36,6 @@
     <tr><td>Total  Spent</td><td>{{currBudget.totalSpent |currency}}</td></tr>
   </table>
 <input type="button" id="btnadd" value="Add" (click)="add()"/>
-  <app-budget-category [month]="currBudget.month" [year]="currBudget.year" [budgetID]="currBudget.budgetID"></app-budget-category>
-  <app-add-category [budgetID]="currBudget.budgetID"></app-add-category>
+  <app-budget-category></app-budget-category>
+  <app-add-category></app-add-category>
 </div>

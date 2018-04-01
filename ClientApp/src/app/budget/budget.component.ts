@@ -18,29 +18,29 @@ export class BudgetComponent implements OnInit {
 
   }
   changeBudget() {
-    this.budgetService.getBudget(this.currBudget.month, this.currBudget.year).subscribe(result => {
-      if (result != null)
-        this.currBudget = result;
-      else {
-        this.currBudget.budgetID = -1;
-        this.currBudget.totalIncome = 0;
-        this.currBudget.totalSpent = 0;
-      }
-    });
+    this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
   }
   add() {
     this.budgetService.add(this.currBudget).subscribe(result => {
-      this.currBudget = result;
+      //this.currBudget = result;
     });
   }
   ngOnInit() {
+    this.budgetService.currBudget$.subscribe(result => {
+      if (result.budgetID == -1) {
+        this.currBudget.totalIncome = 0;
+        this.currBudget.totalSpent = 0;
 
+      }
+      else {
+        this.currBudget = result;
+      }
+    });
     this.catService.newCat$.subscribe(result => {
       this.currBudget.totalSpent += result.amount;
     })
 
 
-    this.budgetService.getBudget(this.currBudget.month, this.currBudget.year).subscribe(result => { this.currBudget = result;
-  });
+    this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
   }
 }
