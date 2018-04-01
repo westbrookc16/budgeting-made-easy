@@ -21,6 +21,11 @@ export class AddCategoryComponent implements OnInit {
   }
   ngOnInit() {
     this.budgetService.currBudget$.subscribe(result => {
+      if (result == null) {
+        this.budgetID = -1;
+        
+      }
+      else
       this.budgetID = result.budgetID;
     });
 

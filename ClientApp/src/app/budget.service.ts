@@ -19,6 +19,8 @@ export class BudgetService {
     
   }
   add(b: Budget) {
-    return this.http.post<Budget>(this.baseUrl + 'api/budget/add', b);
+    return this.http.post<Budget>(this.baseUrl + 'api/budget/add', b).subscribe(result => {
+      this.currBudgetSource.next(result);
+    });
   }
 }

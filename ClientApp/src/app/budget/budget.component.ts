@@ -21,20 +21,23 @@ export class BudgetComponent implements OnInit {
     this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
   }
   add() {
-    this.budgetService.add(this.currBudget).subscribe(result => {
-      //this.currBudget = result;
-    });
+    this.budgetService.add(this.currBudget);
   }
   ngOnInit() {
     this.budgetService.currBudget$.subscribe(result => {
-      if (result.budgetID == -1) {
+      if (result == null || result.budgetID == -1) {
         this.currBudget.totalIncome = 0;
         this.currBudget.totalSpent = 0;
-
+        this.currBudget.budgetID= -1;
+        
       }
       else {
         this.currBudget = result;
       }
+    });
+    this.catService.deletedCategory$.subscribe(result => {
+      this.currBudget.totalSpent -= result.amount;
+      console.log("deleted category subscription");
     });
     this.catService.newCat$.subscribe(result => {
       this.currBudget.totalSpent += result.amount;
