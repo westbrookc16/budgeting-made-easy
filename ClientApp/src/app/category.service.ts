@@ -18,11 +18,10 @@ export class CategoryService {
 
 
   deleteBudgetCategory(cat: BudgetCategory) {
-    /*this.http.put(this.baseUrl + 'api/category/delete', cat.budgetCategoryID).subscribe(result => {
-
-      this.deletedCatSource.next(cat);
-    });*/
-    this.deletedCatSource.next(cat);
+    this.http.put < BudgetCategory>(this.baseUrl + 'api/budgetcategory/delete', cat).subscribe(result => {
+      this.deletedCatSource.next(result);
+    });
+    //this.deletedCatSource.next(cat);
   }
   getBudgetCategories(budgetID: number) {
     const url = this.baseUrl + 'api/budgetcategory/getAll/' + budgetID;
