@@ -17,8 +17,8 @@ import { NgModuleCompileResult } from '@angular/compiler/src/ng_module_compiler'
 export class budgetCategoryComponent implements OnInit, OnChanges {
   categories: BudgetCategory[] = [];
   deleteCategory(cat: BudgetCategory) {
-
-    this.catService.deleteBudgetCategory(cat);
+    if (confirm("are you sure you want to delete the " + cat.name + ' category? Click OK to delete.'))
+      this.catService.deleteBudgetCategory(cat);
   }
   year: number;
   month: number;
@@ -52,7 +52,11 @@ export class budgetCategoryComponent implements OnInit, OnChanges {
 
 
     this.catService.deletedCategory$.subscribe(result => {
-      this.categories.splice(this.categories.indexOf(result), 1);
+      for (var i = 0; i < this.categories.length; i++) {
+        if (this.categories[i].budgetCategoryID == result.budgetCategoryID) {
+          this.categories.splice(i, 1);
+        }
+      }
     });
   }
   ngOnChanges() {
