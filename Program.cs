@@ -9,14 +9,14 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.AspNetCore.Identity;
 namespace budgetmanagementAngular
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
+                        var host = CreateWebHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
             {
@@ -24,7 +24,11 @@ namespace budgetmanagementAngular
                 try
                 {
                     var context = services.GetRequiredService < budgetContext>();
-                    DbInitializer.Initialize(context);
+                    var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+                    var userManager = scope.ServiceProvider.GetService<UserManager<applicationUser>>();
+                    
+//                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    DbInitializer.Initialize(context,roleManager,userManager);
                 }
                 catch (Exception ex)
                 {
