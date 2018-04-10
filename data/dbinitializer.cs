@@ -22,20 +22,20 @@ namespace budgetmanagementAngular.data
                         {
                             return;   // DB has been seeded
                         }*/
-            if (!await context.budgets.AnyAsync())
+            if (!context.budgets.Any())
             {
-
+                context.Database.EnsureCreated();
                 var budgets = new budget[] { new budget { month = 3, year = 2018, creationDate = DateTime.Now, totalIncome = 5000 }, new budget { month = 4, year = 2018, creationDate = DateTime.Now, totalIncome = 8000 } };
                 foreach (var budget in budgets)
                 {
                     await context.budgets.AddAsync(budget);
 
                 }
-                await context.SaveChangesAsync();
+                context.SaveChanges();
 
             }
-            var cateories = new budgetCategory[] { new budgetCategory {  budgetID = 1, name = "testin this", amount = 4000 ,isRecurring=false}, new budgetCategory { budgetCategoryID = 2, budgetID = 2, name = "testin 2", amount = 8000 ,isRecurring=true} };
-                if (!await context.budgetCategories.AnyAsync())
+            var cateories = new budgetCategory[] { new budgetCategory {  budgetID = 1, name = "testin this", amount = 4000 ,isRecurring=false}, new budgetCategory {  budgetID = 2, name = "testin 2", amount = 8000 ,isRecurring=true} };
+                if (!context.budgetCategories.Any())
                 {
                     foreach (var c in cateories)
                     {
@@ -43,7 +43,7 @@ namespace budgetmanagementAngular.data
 
                     }
 
-                    await context.SaveChangesAsync();
+                context.SaveChanges();
                 }
             //}
   

@@ -24,9 +24,9 @@ namespace budgetmanagementAngular
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetService< budgetContext>();
-                    var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
-                    var userManager = scope.ServiceProvider.GetService<UserManager<applicationUser>>();
+                    var context = services.GetRequiredService< budgetContext>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    var userManager = services.GetRequiredService<UserManager<applicationUser>>();
 
                     //                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     context.Database.Migrate();
