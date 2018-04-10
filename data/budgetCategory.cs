@@ -12,5 +12,6 @@ namespace budgetmanagementAngular.data
         public budget budget { get; set; }
         public string name { get; set; }
         public decimal amount { get; set; }
+        public bool isRecurring { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 namespace budgetmanagementAngular
 {
     public class Program
@@ -23,11 +24,12 @@ namespace budgetmanagementAngular
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService < budgetContext>();
+                    var context = services.GetService< budgetContext>();
                     var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
                     var userManager = scope.ServiceProvider.GetService<UserManager<applicationUser>>();
-                    
-//                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+                    //                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    context.Database.Migrate();
                     DbInitializer.Initialize(context,roleManager,userManager);
                 }
                 catch (Exception ex)

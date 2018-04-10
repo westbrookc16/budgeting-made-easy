@@ -13,36 +13,42 @@ namespace budgetmanagementAngular.data
 {
     public static class DbInitializer
     {
-        public static void Initialize(budgetContext context,RoleManager<IdentityRole> roleManager,UserManager<applicationUser> userManager)
+        public static async void Initialize(budgetContext context,RoleManager<IdentityRole> roleManager,UserManager<applicationUser> userManager)
         {
-            context.Database.EnsureCreated();
+
 
             //look for any budgets.
-/*          if (context.budgets.Any())
+            /*          if (context.budgets.Any())
+                        {
+                            return;   // DB has been seeded
+                        }*/
+            if (!await context.budgets.AnyAsync())
             {
-                return;   // DB has been seeded
-            }
-            
-                    
-            var budgets = new budget[] { new budget { month = 3, year = 2018, creationDate = DateTime.Now, totalIncome = 5000 }, new budget { month = 4, year = 2018, creationDate = DateTime.Now, totalIncome = 8000 } };
-            foreach (var budget in budgets)
-            {
-                context.budgets.Add(budget);
 
-            }
-            context.SaveChanges();
-            var cateories = new budgetCategory[] { new budgetCategory { budgetCategoryID = 1, budgetID = 1, name = "testin this", amount = 4000 },new budgetCategory { budgetCategoryID = 2, budgetID = 2, name = "testin 2", amount = 8000 } };
-            foreach (var c in cateories)
-            {
-                context.budgetCategories.Add(c);
+                var budgets = new budget[] { new budget { month = 3, year = 2018, creationDate = DateTime.Now, totalIncome = 5000 }, new budget { month = 4, year = 2018, creationDate = DateTime.Now, totalIncome = 8000 } };
+                foreach (var budget in budgets)
+                {
+                    await context.budgets.AddAsync(budget);
+
+                }
+                await context.SaveChangesAsync();
 
             }
-            context.SaveChanges();
+            var cateories = new budgetCategory[] { new budgetCategory {  budgetID = 1, name = "testin this", amount = 4000 ,isRecurring=false}, new budgetCategory { budgetCategoryID = 2, budgetID = 2, name = "testin 2", amount = 8000 ,isRecurring=true} };
+                if (!await context.budgetCategories.AnyAsync())
+                {
+                    foreach (var c in cateories)
+                    {
+                        await context.budgetCategories.AddAsync(c);
 
+                    }
 
-  */          
+                    await context.SaveChangesAsync();
+                }
+            //}
+  
             CreateUsers(context, roleManager, userManager).GetAwaiter().GetResult();
-            context.SaveChanges();
+            
         }
         private static async Task CreateUsers(
             budgetContext dbContext,
