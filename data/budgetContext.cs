@@ -11,5 +11,6 @@ namespace budgetmanagementAngular.data
         public budgetContext(DbContextOptions options) : base(options) { }
         public DbSet<budget> budgets { get; set; }
         public DbSet<budgetCategory> budgetCategories { get; set; }
+        
     }
 }
