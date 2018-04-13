@@ -11,6 +11,7 @@ namespace budgetmanagementAngular.data
         public List<budgetCategory> categories { get; set; }
         public int month { get; set; }
         public int year { get; set; }
+        
         public decimal totalIncome { get; set; }
         public DateTime? creationDate { get; set; }
         public decimal totalSpent

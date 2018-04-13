@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using budgetmanagementAngular.data;
 
 namespace budgetmanagementAngular.Migrations
@@ -18,7 +16,7 @@ namespace budgetmanagementAngular.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-preview1-28290")
+                .HasAnnotation("ProductVersion", "2.1.0-preview2-30571")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("budgetmanagementAngular.data.applicationUser", b =>
@@ -82,6 +80,10 @@ namespace budgetmanagementAngular.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new { Id = "ab6fd72a-3157-4c8f-bafc-33d795b4f642", AccessFailedCount = 0, ConcurrencyStamp = "523887e3-e23e-4b39-a381-f53a6bf3c5f5", CreatedDate = new DateTime(2018, 4, 12, 21, 2, 17, 462, DateTimeKind.Local), DisplayName = "admin", EmailConfirmed = false, Flags = 0, LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), LockoutEnabled = false, PhoneNumberConfirmed = false, TwoFactorEnabled = false, Type = 0, UserName = "admin" }
+                    );
                 });
 
             modelBuilder.Entity("budgetmanagementAngular.data.budget", b =>
@@ -100,6 +102,10 @@ namespace budgetmanagementAngular.Migrations
                     b.HasKey("budgetID");
 
                     b.ToTable("budgets");
+
+                    b.HasData(
+                        new { budgetID = 1, creationDate = new DateTime(2018, 4, 12, 21, 2, 17, 460, DateTimeKind.Local), month = 3, totalIncome = 5000m, year = 2018 }
+                    );
                 });
 
             modelBuilder.Entity("budgetmanagementAngular.data.budgetCategory", b =>

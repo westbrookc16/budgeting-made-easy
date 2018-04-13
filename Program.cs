@@ -29,8 +29,8 @@ namespace budgetmanagementAngular
                     var userManager = services.GetRequiredService<UserManager<applicationUser>>();
 
                     //                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    context.Database.Migrate();
-                    DbInitializer.Initialize(context,roleManager,userManager);
+                    
+                    //DbInitializer.Initialize(context,roleManager,userManager);
                 }
                 catch (Exception ex)
                 {
