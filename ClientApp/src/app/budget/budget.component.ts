@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Budget } from '../classes/budget';
 import { HttpClient } from '@angular/common/http';
-import { BudgetService } from '../budget.service';
+import { BudgetService } from '../services/budget.service';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
-import { CategoryService } from '../category.service';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-budget',

@@ -4,8 +4,8 @@ import { Input, Inject } from '@angular/core';
 import { BudgetCategory } from '../classes/BudgetCategory';
 import { HttpClient } from '@angular/common/http';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
-import { CategoryService } from '../category.service';
-import { BudgetService } from '../budget.service';
+import { CategoryService } from '../services/category.service';
+import { BudgetService } from '../services/budget.service';
 import { NgModuleCompileResult } from '@angular/compiler/src/ng_module_compiler';
 
 @Component({

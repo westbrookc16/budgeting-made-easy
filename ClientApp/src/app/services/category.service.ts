@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { BudgetCategory } from './classes/BudgetCategory';
+import { BudgetCategory } from '../classes/BudgetCategory';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 

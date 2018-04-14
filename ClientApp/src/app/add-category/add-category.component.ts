@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { budgetCategoryComponent } from '../budgetCategory/budgetCategory.component';
 import { BudgetCategory } from '../classes/BudgetCategory';
-import { CategoryService } from '../category.service';
-import { BudgetService } from '../budget.service';
+import { CategoryService } from '../services/category.service';
+import { BudgetService } from '../services/budget.service';
 
 @Component({
   selector: 'app-add-category',

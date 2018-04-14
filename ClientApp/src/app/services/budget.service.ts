@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Budget } from './classes/budget';
+import { Budget } from '..//classes/budget';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 

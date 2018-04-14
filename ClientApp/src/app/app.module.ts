@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -15,9 +15,12 @@ import { componentFactoryName } from '@angular/compiler';
 import { Component } from '@angular/core/src/metadata/directives';
 import { budgetCategoryComponent } from './budgetCategory/budgetCategory.component';
 //import { CategoryListComponent } from './category-list/category-list.component';
-import { BudgetService } from './budget.service';
+import { BudgetService } from './services/budget.service';
 import { AddCategoryComponent } from './add-category/add-category.component';
-import { CategoryService } from './category.service';
+import { CategoryService } from './services/category.service';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './services/auth.service';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 
 @NgModule({
@@ -29,18 +32,25 @@ import { CategoryService } from './category.service';
     FetchDataComponent,
     BudgetComponent,
     budgetCategoryComponent,
-    AddCategoryComponent
+    AddCategoryComponent, LoginComponent
   ],
-  providers: [BudgetService, CategoryService],
+  providers: [BudgetService, CategoryService, AuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'budget', component: BudgetComponent }
+      { path: 'budget', component: BudgetComponent },
+      { path: 'login', component: LoginComponent }
 
     ]),
     CurrencyMaskModule
