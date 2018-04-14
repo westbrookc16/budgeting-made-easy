@@ -37,7 +37,7 @@ namespace budgetmanagementAngular.Controllers
 
         }
         #endregion
-
+        
         #region Shared Properties
         protected budgetContext DbContext { get; private set; }
         protected RoleManager<IdentityRole> RoleManager

@@ -10,9 +10,10 @@ using budgetmanagementAngular.data;
 namespace budgetmanagementAngular.Migrations
 {
     [DbContext(typeof(budgetContext))]
-    partial class budgetContextModelSnapshot : ModelSnapshot
+    [Migration("20180414180610_tokenandMoney")]
+    partial class tokenandMoney
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,7 +280,7 @@ namespace budgetmanagementAngular.Migrations
             modelBuilder.Entity("budgetmanagementAngular.data.Token", b =>
                 {
                     b.HasOne("budgetmanagementAngular.data.applicationUser", "User")
-                        .WithMany("Tokens")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

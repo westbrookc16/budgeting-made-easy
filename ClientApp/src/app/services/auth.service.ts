@@ -26,27 +26,48 @@ export class AuthService {
             scope: "offline_access profile email"
         };
 
-        return this.http.post<TokenResponse>(url, data)
-            .map((res) => {
-                let token = res && res.token;
-                // if the token is there, login has been successful
-                if (token) {
-                    // store username and jwt token
-                    this.setAuth(res);
-                    // successful login
-                    return true;
-                }
+      return this.getAuthFromServer(url, data);        
 
-                // failed login
-                return Observable.throw('Unauthorized');
-            })
-          .catch(error => {
-            console.log("catching error.");
-            //console.log(error);
-            return Observable.throw(error);
-            });
     }
+  
 
+  // try to refresh token
+  refreshToken(): Observable<boolean> {
+    var url = "api/token/auth";
+    var data = {
+      client_id: this.clientId,
+      // required when signing up with username/password
+      grant_type: "refresh_token",
+      refresh_token: this.getAuth()!.refresh_token,
+      // space-separated list of scopes for which the token is issued
+      scope: "offline_access profile email"
+    };
+
+    return this.getAuthFromServer(url, data);
+  }
+
+  // retrieve the access & refresh tokens from the server
+  getAuthFromServer(url: string, data: any): Observable<boolean> {
+    return this.http.post<TokenResponse>(url, data)
+      .map((res) => {
+        let token = res && res.token;
+        // if the token is there, login has been successful
+        if (token) {
+          // store username and jwt token
+          this.setAuth(res);
+          // successful login
+          return true;
+        }
+
+        // failed login
+        return Observable.throw('Unauthorized');
+      })
+      .catch(error => {
+        return new Observable<any>(error);
+      });
+  }
+
+  
     // performs the logout
     logout(): boolean {
         this.setAuth(null);

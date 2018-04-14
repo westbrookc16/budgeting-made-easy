@@ -7,22 +7,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using budgetmanagementAngular.viewModels;
 using Newtonsoft.Json;
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace budgetmanagementAngular.Controllers
 {
     [Route("api/[controller]")]
-    public class budgetController : Controller
+    public class budgetController : BaseApiController
     {
-        private readonly IMapper _mapper;
-        private budgetContext db;
-        public budgetController(IMapper mapper, budgetContext context)
+        
+        
+        
+        public budgetController(budgetContext db, RoleManager<IdentityRole> roleManager,
+            UserManager<applicationUser> userManager,
+            IConfiguration configuration
+            )
+            : base(db, roleManager, userManager, configuration)
         {
-            _mapper = mapper;
-            db = context;
+            
+
         }
         // GET: api/<controller>
         [HttpPost("add")]
+        [Authorize]
         public JsonResult add([FromBody] budget b)
         {
             if (b.budgetID == -1)
@@ -33,20 +42,21 @@ namespace budgetmanagementAngular.Controllers
                 c.month = b.month;
                 c.year = b.year;
                 b.creationDate = DateTime.Now;
-                
-                db.budgets.Add(c);
-                db.SaveChanges();
+                c.userID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                DbContext.budgets.Add(c);
+                DbContext.SaveChanges();
                 
                 return new JsonResult(c, new JsonSerializerSettings() { Formatting = Formatting.Indented });
             }
             else
             {
-                var q = from bdg in db.budgets where bdg.budgetID==b.budgetID select bdg;
+                var q = from bdg in DbContext.budgets where bdg.budgetID==b.budgetID select bdg;
                 budget updatedBudget = new budget();
                 updatedBudget = q.Single();
                 updatedBudget.totalIncome = b.totalIncome;
-                db.SaveChanges();
-                return new JsonResult(updatedBudget, new JsonSerializerSettings() { Formatting = Formatting.Indented });
+                DbContext.SaveChanges();
+                return new JsonResult(updatedBudget, JsonSettings);
 
             }
 
@@ -54,11 +64,12 @@ namespace budgetmanagementAngular.Controllers
 
         }
         [HttpGet("getBudget/{month}/{year}")]
+[Authorize]
         public IActionResult getBudget(int? month = 3, int? year = 2018)
         {
 
 
-            var q = from budget in db.budgets where budget.month == month && budget.year == year select new { budget.budgetID, budget.month, budget.year, totalSpent = budget.categories.Sum(p => p.amount), budget.totalIncome };
+            var q = from budget in DbContext.budgets where budget.month == month && budget.year == year &&budget.userID== User.FindFirst(ClaimTypes.NameIdentifier).Value select new { budget.budgetID, budget.month, budget.year, totalSpent = budget.categories.Sum(p => p.amount), budget.totalIncome };
             //budgetViewModel b = _mapper.Map<budgetViewModel>(q.SingleOrDefault());
 
             //}

@@ -49,7 +49,7 @@ namespace budgetmanagementAngular.data
         /// <summary>
         /// A list of all the quiz created by this users.
         /// </summary>
-        
+        public virtual List<Token> Tokens { get; set; }
         #endregion
     }
 }

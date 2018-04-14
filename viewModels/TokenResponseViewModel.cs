@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace budgetmanagementAngular.viewModels
+namespace budgetmanagementAngular.data
 {
     [JsonObject(MemberSerialization.OptOut)]
     public class TokenResponseViewModel
@@ -15,6 +15,7 @@ namespace budgetmanagementAngular.viewModels
         #region Properties
         public string token { get; set; }
         public int expiration { get; set; }
+        public string refresh_token { get; set; }
         #endregion
     }
 }

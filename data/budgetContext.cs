@@ -11,6 +11,8 @@ namespace budgetmanagementAngular.data
         public budgetContext(DbContextOptions options) : base(options) { }
         public DbSet<budget> budgets { get; set; }
         public DbSet<budgetCategory> budgetCategories { get; set; }
+        public DbSet<Token> tokens { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

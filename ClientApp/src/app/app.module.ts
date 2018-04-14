@@ -20,8 +20,9 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { CategoryService } from './services/category.service';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
-import { AuthInterceptor } from './services/auth.interceptor';
 
+import { AuthInterceptor } from './services/auth.interceptor';
+import { AuthResponseInterceptor } from './services/auth.response.interceptor';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,13 @@ import { AuthInterceptor } from './services/auth.interceptor';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthResponseInterceptor,
+      multi: true
+    }
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,

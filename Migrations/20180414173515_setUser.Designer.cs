@@ -10,9 +10,10 @@ using budgetmanagementAngular.data;
 namespace budgetmanagementAngular.Migrations
 {
     [DbContext(typeof(budgetContext))]
-    partial class budgetContextModelSnapshot : ModelSnapshot
+    [Migration("20180414173515_setUser")]
+    partial class setUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,8 +92,7 @@ namespace budgetmanagementAngular.Migrations
 
                     b.Property<int>("month");
 
-                    b.Property<decimal>("totalIncome")
-                        .HasColumnType("money");
+                    b.Property<decimal>("totalIncome");
 
                     b.Property<string>("userID");
 
@@ -110,8 +110,7 @@ namespace budgetmanagementAngular.Migrations
                     b.Property<int>("budgetCategoryID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<decimal>("amount")
-                        .HasColumnType("money");
+                    b.Property<decimal>("amount");
 
                     b.Property<int>("budgetID");
 
@@ -124,33 +123,6 @@ namespace budgetmanagementAngular.Migrations
                     b.HasIndex("budgetID");
 
                     b.ToTable("budgetCategories");
-                });
-
-            modelBuilder.Entity("budgetmanagementAngular.data.Token", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ClientId")
-                        .IsRequired();
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime>("LastModifiedDate");
-
-                    b.Property<int>("Type");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.Property<string>("Value")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("tokens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -273,14 +245,6 @@ namespace budgetmanagementAngular.Migrations
                     b.HasOne("budgetmanagementAngular.data.budget", "budget")
                         .WithMany("categories")
                         .HasForeignKey("budgetID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("budgetmanagementAngular.data.Token", b =>
-                {
-                    b.HasOne("budgetmanagementAngular.data.applicationUser", "User")
-                        .WithMany("Tokens")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
