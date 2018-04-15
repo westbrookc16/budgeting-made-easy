@@ -4,87 +4,83 @@ import { Router } from "@angular/router";
 import { AuthService } from '../services/auth.service';
 
 @Component({
-    selector: "login",
-    templateUrl: "./login.component.html",
-    styleUrls: ['./login.component.css']
+  selector: "login",
+  templateUrl: "./login.component.html",
+  styleUrls: ['./login.component.css']
 })
 
 export class LoginComponent {
-    title: string;
-    form: FormGroup;
+  title: string;
+  form: FormGroup;
 
-    constructor(private router: Router,
-        private fb: FormBuilder,
-        private authService: AuthService,
-        @Inject('BASE_URL') private baseUrl: string) {
+  constructor(private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    @Inject('BASE_URL') private baseUrl: string) {
 
-        this.title = "User Login";
+    this.title = "User Login";
 
-        // initialize the form
-        this.createForm();
+    // initialize the form
+    this.createForm();
 
-    }
+  }
 
-    createForm() {
-        this.form = this.fb.group({
-            Username: ['', Validators.required],
-            Password: ['', Validators.required]
-        });
-    }
+  createForm() {
+    this.form = this.fb.group({
+      Username: ['', Validators.required],
+      Password: ['', Validators.required]
+    });
+  }
 
-    onSubmit() {
-        var url = this.baseUrl + "api/token/auth";
-        var username = this.form.value.Username;
-        var password = this.form.value.Password;
+  onSubmit() {
+    var url = this.baseUrl + "api/token/auth";
+    var username = this.form.value.Username;
+    var password = this.form.value.Password;
 
-        this.authService.login(username, password)
-            .subscribe(res => {
-                // login successful
+    this.authService.login(username, password)
+      .subscribe(res => {
+        // login successful
 
-                // outputs the login info through a JS alert.
-                // IMPORTANT: remove this when test is done.
-/*                alert("Login successful! "
-                    + "USERNAME: "
-                    + username
-                    + " TOKEN: "
-                    + this.authService.getAuth()!.token
-                );*/
+        // outputs the login info through a JS alert.
+        // IMPORTANT: remove this when test is done.
 
-                this.router.navigate(["budget"]);
-            },
-            err => {
-                // login failed
-                console.log(err)
-                this.form.setErrors({
-                    "auth": "Incorrect username or password"
-                });
-            });
-    }
 
-    onBack() {
-        this.router.navigate(["home"]);
-    }
+        this.router.navigate(["budget"]);
+      },
+        err => {
+          // login failed
+          console.log(err)
+          this.form.setErrors({
+            "auth": "Incorrect username or password"
+          });
+                      });
 
-    // retrieve a FormControl
+  }
+  onBack() {
+    this.router.navigate(["home"]);
+  }
+
+  // retrieve a FormControl
+
     getFormControl(name: string) {
-        return this.form.get(name);
-    }
+    return this.form.get(name);
+  }
 
-    // returns TRUE if the FormControl is valid
-    isValid(name: string) {
-        var e = this.getFormControl(name);
-        return e && e.valid;
-    }
+  // returns TRUE if the FormControl is valid
+  isValid(name: string) {
+    var e = this.getFormControl(name);
+    return e && e.valid;
+  }
 
-    // returns TRUE if the FormControl has been changed
-    isChanged(name: string) {
-        var e = this.getFormControl(name);
-        return e && (e.dirty || e.touched);
-    }
+  // returns TRUE if the FormControl has been changed
+  isChanged(name: string) {
+    var e = this.getFormControl(name);
+    return e && (e.dirty || e.touched);
+  }
 
-    // returns TRUE if the FormControl is invalid after user changes
-    hasError(name: string) {
-        var e = this.getFormControl(name);
-        return e && (e.dirty || e.touched) && !e.valid;
-    }
+  // returns TRUE if the FormControl is invalid after user changes
+  hasError(name: string) {
+    var e = this.getFormControl(name);
+    return e && (e.dirty || e.touched) && !e.valid;
+  }
 }
