@@ -3,8 +3,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgModule } from '@angular/core';
 import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-
+import { RootingModule } from '../app/rooting/rooting.module';
+import { Router, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -51,15 +51,8 @@ import { AuthResponseInterceptor } from './services/auth.response.interceptor';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'budget', component: BudgetComponent },
-      { path: 'login', component: LoginComponent }
-
-    ]),
+    
+    RootingModule,
     CurrencyMaskModule
 
   ],
