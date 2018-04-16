@@ -24,8 +24,8 @@ export class AuthService {
             grant_type: "password",
             // space-separated list of scopes for which the token is issued
             scope: "offline_access profile email"
-        };
-
+      };
+      
       return this.getAuthFromServer(url, data);        
 
     }
@@ -50,6 +50,7 @@ export class AuthService {
   getAuthFromServer(url: string, data: any): Observable<boolean> {
     return this.http.post<TokenResponse>(url, data)
       .map((res) => {
+        
         let token = res && res.token;
         // if the token is there, login has been successful
         if (token) {
@@ -64,7 +65,7 @@ export class AuthService {
       })
       .catch(error => {
         //return new Observable<any>(error);
-        return Observable.throw('Unauthorized');
+        return Observable.throw(error); 
       });
   }
 

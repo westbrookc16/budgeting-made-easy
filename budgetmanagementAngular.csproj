@@ -29,21 +29,29 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\add-category\**" />
+    <Compile Remove="ClientApp\src\app\budgetCategory\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\add-category\**" />
+    <Content Remove="ClientApp\src\app\budgetCategory\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="ClientApp\src\app\add-category\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\budgetCategory\**" />
+    <None Remove="ClientApp\src\app\add-category\**" />
+    <None Remove="ClientApp\src\app\budgetCategory\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="ClientApp\e2e\app.e2e-spec.ts" />
     <None Remove="ClientApp\e2e\app.po.ts" />
-    <None Remove="ClientApp\src\app\add-category\add-category.component.spec.ts" />
-    <None Remove="ClientApp\src\app\add-category\add-category.component.ts" />
     <None Remove="ClientApp\src\app\app.component.ts" />
     <None Remove="ClientApp\src\app\app.module.ts" />
+    <None Remove="ClientApp\src\app\auth.guard.ts" />
     <None Remove="ClientApp\src\app\budget.service.spec.ts" />
     <None Remove="ClientApp\src\app\budget.service.ts" />
-    <None Remove="ClientApp\src\app\budgetCategory\budgetCategory.component.spec.ts" />
-    <None Remove="ClientApp\src\app\budgetCategory\budgetCategory.component.ts" />
     <None Remove="ClientApp\src\app\budget\add-categoryComponent\add-category.component.spec.ts" />
     <None Remove="ClientApp\src\app\budget\add-categoryComponent\add-category.component.ts" />
     <None Remove="ClientApp\src\app\budget\add-category\add-category.component.spec.ts" />
@@ -58,7 +66,6 @@
     <None Remove="ClientApp\src\app\budget\budgetCategory\budgetCategory.component.ts" />
     <None Remove="ClientApp\src\app\budget\budgetComponent\budget.component.spec.ts" />
     <None Remove="ClientApp\src\app\budget\budgetComponent\budget.component.ts" />
-    <None Remove="ClientApp\src\app\budget\budget\budget.module.ts" />
     <None Remove="ClientApp\src\app\budget\classes\budget.ts" />
     <None Remove="ClientApp\src\app\budget\classes\budgetcategory.ts" />
     <None Remove="ClientApp\src\app\budget\services\budget.service.spec.ts" />
@@ -104,14 +111,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\e2e\app.e2e-spec.ts" />
     <TypeScriptCompile Include="ClientApp\e2e\app.po.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\add-category\add-category.component.spec.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\add-category\add-category.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\app.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\app.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\budget.service.spec.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\budget.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\budgetCategory\budgetCategory.component.spec.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\budgetCategory\budgetCategory.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\auth.guard.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\add-categoryComponent\add-category.component.spec.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\add-categoryComponent\add-category.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\add-category\add-category.component.spec.ts" />
@@ -132,8 +134,6 @@
     <TypeScriptCompile Include="ClientApp\src\app\budget\services\budget.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\services\category.service.spec.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\services\category.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\category.service.spec.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\category.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\classes\budget.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\classes\budgetcategory.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\counter\counter.component.spec.ts" />
@@ -161,10 +161,6 @@
     <TypeScriptCompile Include="ClientApp\src\polyfills.ts" />
     <TypeScriptCompile Include="ClientApp\src\test.ts" />
     <TypeScriptCompile Include="ClientApp\src\typings.d.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\app\budget\budget\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

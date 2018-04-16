@@ -44,12 +44,13 @@ export class LoginComponent {
         // outputs the login info through a JS alert.
         // IMPORTANT: remove this when test is done.
 
-
+        
         this.router.navigate(["budget"]);
       },
         err => {
           // login failed
           console.log(err)
+          
           this.form.setErrors({
             "auth": "Incorrect username or password"
           });
