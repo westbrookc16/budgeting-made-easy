@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { budgetCategoryComponent } from '../budgetCategory/budgetCategory.component';
+import { budgetCategoryComponent } from '../budgetCategoryComponent/budgetCategory.component'
 import { BudgetCategory } from '../classes/BudgetCategory';
 import { CategoryService } from '../services/category.service';
 import { BudgetService } from '../services/budget.service';
