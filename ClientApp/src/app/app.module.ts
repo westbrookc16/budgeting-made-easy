@@ -13,7 +13,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BudgetComponent } from './budget/budgetComponent/budget.component';
 import { componentFactoryName } from '@angular/compiler';
 import { Component } from '@angular/core/src/metadata/directives';
-import { budgetCategoryComponent } from './budget/budgetCategoryComponent/budgetCategory.component';
+import { BudgetCategoryComponent } from './budget/budgetCategoryComponent/budgetCategory.component';
 //import { CategoryListComponent } from './category-list/category-list.component';
 
 //import { AddCategoryComponent } from './add-category/add-category.component';
@@ -27,6 +27,7 @@ import { BudgetRootingModule } from './budget/budget-rooting/budget-rooting.modu
 import { AddCategoryComponent } from './budget/add-categoryComponent/add-category.component';
 import { CategoryService } from './budget/services/category.service';
 import { BudgetService } from './budget/services/budget.service';
+import { BudgetModule } from './budget/budget.module';
 
 @NgModule({
   declarations: [
@@ -35,10 +36,8 @@ import { BudgetService } from './budget/services/budget.service';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    LoginComponent,
-    BudgetComponent,
-    budgetCategoryComponent,
-    AddCategoryComponent
+    LoginComponent
+
   ],
   providers: [AuthService, {
     provide: HTTP_INTERCEPTORS,
@@ -49,14 +48,14 @@ import { BudgetService } from './budget/services/budget.service';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthResponseInterceptor,
       multi: true
-    }, CategoryService, BudgetService
+    } 
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BudgetRootingModule,
+    BudgetModule,
     RootingModule,
 
     

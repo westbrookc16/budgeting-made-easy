@@ -14,7 +14,7 @@ import { NgModuleCompileResult } from '@angular/compiler/src/ng_module_compiler'
   styleUrls: ['./budgetCategory.component.css'],
   //providers: [CategoryService]
 })
-export class budgetCategoryComponent implements OnInit, OnChanges {
+export class BudgetCategoryComponent implements OnInit, OnChanges {
   categories: BudgetCategory[] = [];
   deleteCategory(cat: BudgetCategory) {
     if (confirm("are you sure you want to delete the " + cat.name + ' category? Click OK to delete.'))

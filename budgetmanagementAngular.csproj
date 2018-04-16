@@ -51,12 +51,14 @@
     <None Remove="ClientApp\src\app\budget\budget-rooting\budget-rooting.module.ts" />
     <None Remove="ClientApp\src\app\budget\budget.component.spec.ts" />
     <None Remove="ClientApp\src\app\budget\budget.component.ts" />
+    <None Remove="ClientApp\src\app\budget\budget.module.ts" />
     <None Remove="ClientApp\src\app\budget\budgetCategoryComponent\budgetCategory.component.spec.ts" />
     <None Remove="ClientApp\src\app\budget\budgetCategoryComponent\budgetCategory.component.ts" />
     <None Remove="ClientApp\src\app\budget\budgetCategory\budgetCategory.component.spec.ts" />
     <None Remove="ClientApp\src\app\budget\budgetCategory\budgetCategory.component.ts" />
     <None Remove="ClientApp\src\app\budget\budgetComponent\budget.component.spec.ts" />
     <None Remove="ClientApp\src\app\budget\budgetComponent\budget.component.ts" />
+    <None Remove="ClientApp\src\app\budget\budget\budget.module.ts" />
     <None Remove="ClientApp\src\app\budget\classes\budget.ts" />
     <None Remove="ClientApp\src\app\budget\classes\budgetcategory.ts" />
     <None Remove="ClientApp\src\app\budget\services\budget.service.spec.ts" />
@@ -123,6 +125,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\budget\budgetCategory\budgetCategory.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\budgetComponent\budget.component.spec.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\budgetComponent\budget.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\budget\budget.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\classes\budget.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\classes\budgetcategory.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\budget\services\budget.service.spec.ts" />
@@ -158,6 +161,10 @@
     <TypeScriptCompile Include="ClientApp\src\polyfills.ts" />
     <TypeScriptCompile Include="ClientApp\src\test.ts" />
     <TypeScriptCompile Include="ClientApp\src\typings.d.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\budget\budget\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
