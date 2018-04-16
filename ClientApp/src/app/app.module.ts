@@ -60,7 +60,7 @@ import { BudgetService } from './budget/services/budget.service';
     RootingModule,
 
     
-    CurrencyMaskModule
+    //CurrencyMaskModule
 
   ],
   bootstrap: [AppComponent],
