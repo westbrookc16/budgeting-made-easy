@@ -28,6 +28,7 @@ import { AddCategoryComponent } from './budget/add-categoryComponent/add-categor
 import { CategoryService } from './budget/services/category.service';
 import { BudgetService } from './budget/services/budget.service';
 import { BudgetModule } from './budget/budget.module';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { BudgetModule } from './budget/budget.module';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
 
   ],
   providers: [AuthService, {
