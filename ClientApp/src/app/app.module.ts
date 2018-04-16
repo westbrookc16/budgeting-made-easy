@@ -59,7 +59,7 @@ import { BudgetModule } from './budget/budget.module';
     RootingModule,
 
     
-    //CurrencyMaskModule
+    
 
   ],
   bootstrap: [AppComponent],
