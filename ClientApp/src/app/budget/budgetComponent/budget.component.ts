@@ -46,10 +46,9 @@ export class BudgetComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       if (params.get('month') == null) {
-        this.currBudget.month = new Date().getMonth() + 1;
-        this.currBudget.month = new Date().getMonth() + 1;
+        this.currBudget.month = new Date().getMonth() + 1;        
         this.currBudget.year = new Date().getFullYear();
-        this.router.navigateByUrl('budget/' + this.currBudget.month + '/' + this.currBudget.year);
+        this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
       }
       else { 
       this.currBudget.month = +params.get('month');
