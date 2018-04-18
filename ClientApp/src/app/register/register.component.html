@@ -1,14 +1,15 @@
 <h1>Register Here</h1>
 <form [formGroup]="registerForm">
 <table>
-  <tr><td><label for="firstName">First Name</label></td><td><input id="firstName" formControlName="firstName" /></td></tr>
+  <tr><td><label for="firstName">First Name</label></td><td><input id="firstName"formControlName="firstName"matInput /></td></tr>
   <tr><td><label for="lastName">Last Name</label></td><td><input id="lastName" formControlName="lastName" /></td></tr>
   <tr><td><label for="email">Email*</label></td><td><input id="email" formControlName="email" /></td></tr>
-  <tr><td><label for="password1">Password*</label></td><td><input id="password1" formControlName="password1" type="password" /></td></tr>
-  <tr><td><label for="password2">Confirm Password*</label></td><td><input id="password2" formControlName="password2" type="password" /></td></tr>
+  <tr><td><label for="password">Password*</label></td><td><input id="password" formControlName="password" type="password" /></td></tr>
+  <tr><td><label for="confirmPassword">Confirm Password*</label></td><td><input id="confirmPassword" formControlName="confirmPassword" type="password" /></td></tr>
   <tr><td><label for="referral">How Did you Here about Us?</label></td><td><input id="referral" formControlName="referral" /></td></tr>
 </table>
 <input type="submit" formControlName="submit"/>
 </form>
+<div *ngIf="registerForm.errors?.passwordsMatch">{{registerForm.errors.passwordsMatch}}</div>
 values {{registerForm.value|json}}
 <p><p>status:{{registerForm.status}}

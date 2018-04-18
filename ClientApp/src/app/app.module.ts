@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgModule } from '@angular/core';
 import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RootingModule } from '../app/rooting/rooting.module';
 import { Router, RouterModule } from '@angular/router';
@@ -39,6 +40,7 @@ import { RegisterComponent } from './register/register.component';
     FetchDataComponent,
     LoginComponent,
     RegisterComponent
+    //MatInputModule
 
   ],
   providers: [AuthService, {
@@ -59,7 +61,7 @@ import { RegisterComponent } from './register/register.component';
     ReactiveFormsModule,
     BudgetModule,
     RootingModule,
-
+    MatInputModule
     
     
 

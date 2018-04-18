@@ -1,22 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatInput } from '@angular/material';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   createForm() {
     this.registerForm = this.fb.group({
-      firstName: [''],
-      lastName:[''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', Validators.email],
-      password1:[''],
-      password2:[''],
-      referral:[''],
-      submit:['Submit']
-    });
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      referral: '',
+      submit: ['Submit']
+    }, { validator: this.passwordsMatch });
+  }
+  passwordsMatch(registerForm: FormGroup) {
+    //console.log('running');
+    if (registerForm.get('password').value == registerForm.get('confirmPassword').value) {
+      return null;
+    }
+    else {
+      console.log('hey');
+      return { 'passwordsMatch': 'Your passwords must match' };
+    }
   }
   constructor(private fb: FormBuilder) {
     this.createForm();
