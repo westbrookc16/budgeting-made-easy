@@ -26,9 +26,13 @@ export class RegisterComponent implements OnInit {
       return null;
     }
     else {
-      console.log('hey');
+      
       return { 'passwordsMatch': 'Your passwords must match' };
     }
+  }
+  onSubmit() {
+    
+
   }
   constructor(private fb: FormBuilder) {
     this.createForm();
