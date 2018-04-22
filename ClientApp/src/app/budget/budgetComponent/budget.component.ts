@@ -6,6 +6,7 @@ import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { CategoryService } from '../services/category.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-budget',
   templateUrl: './budget.component.html',
@@ -13,9 +14,10 @@ import 'rxjs/add/operator/switchMap';
 })
 
 export class BudgetComponent implements OnInit {
+
   currBudget: Budget = new Budget();
 
-  constructor(private budgetService: BudgetService, private catService: CategoryService, private route: ActivatedRoute, private router: Router) {
+  constructor(private budgetService: BudgetService, private catService: CategoryService, private route: ActivatedRoute, private router: Router, private auth: AuthService) {
 
   }
   changeBudget() {
@@ -24,38 +26,43 @@ export class BudgetComponent implements OnInit {
   add() {
     this.budgetService.add(this.currBudget);
   }
+  profile: any;
   ngOnInit() {
+
+    this.auth.getProfile();
+    
+
     this.budgetService.currBudget$.subscribe(result => {
-      if (result == null || result.budgetID == -1) {
-        this.currBudget.totalIncome = 0;
-        this.currBudget.totalSpent = 0;
-        this.currBudget.budgetID = -1;
+  if (result == null || result.budgetID == -1) {
+    this.currBudget.totalIncome = 0;
+    this.currBudget.totalSpent = 0;
+    this.currBudget.budgetID = -1;
 
-      }
-      else {
-        this.currBudget = result;
-      }
-    });
-    this.catService.deletedCategory$.subscribe(result => {
-      this.currBudget.totalSpent -= result.amount;
-      console.log("deleted category subscription");
-    });
-    this.catService.newCat$.subscribe(result => {
-      this.currBudget.totalSpent += result.amount;
-    });
+  }
+  else {
+    this.currBudget = result;
+  }
+});
+this.catService.deletedCategory$.subscribe(result => {
+  this.currBudget.totalSpent -= result.amount;
+  console.log("deleted category subscription");
+});
+this.catService.newCat$.subscribe(result => {
+  this.currBudget.totalSpent += result.amount;
+});
 
-    this.route.paramMap.subscribe(params => {
-      if (params.get('month') == null) {
-        this.currBudget.month = new Date().getMonth() + 1;        
-        this.currBudget.year = new Date().getFullYear();
-        this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
-      }
-      else { 
-      this.currBudget.month = +params.get('month');
-      this.currBudget.year = +params.get('year');
-      this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
-    }
-    });  
+this.route.paramMap.subscribe(params => {
+  if (params.get('month') == null) {
+    this.currBudget.month = new Date().getMonth() + 1;
+    this.currBudget.year = new Date().getFullYear();
+    //this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
+  }
+  else {
+    this.currBudget.month = +params.get('month');
+    this.currBudget.year = +params.get('year');
+    //this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
+  }
+});  
     
     
  }   

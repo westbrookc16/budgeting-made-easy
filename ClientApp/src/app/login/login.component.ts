@@ -19,44 +19,16 @@ export class LoginComponent {
     @Inject('BASE_URL') private baseUrl: string) {
 
     this.title = "User Login";
+    
 
+    
     // initialize the form
-    this.createForm();
+    this.authService.login();
 
   }
 
-  createForm() {
-    this.form = this.fb.group({
-      Username: ['', Validators.required],
-      Password: ['', Validators.required]
-    });
-  }
-
-  onSubmit() {
-    var url = this.baseUrl + "api/token/auth";
-    var username = this.form.value.Username;
-    var password = this.form.value.Password;
-
-    this.authService.login(username, password)
-      .subscribe(res => {
-        // login successful
-
-        // outputs the login info through a JS alert.
-        // IMPORTANT: remove this when test is done.
-
-        
-        this.router.navigate(["budget"]);
-      },
-        err => {
-          // login failed
-          console.log(err)
-          
-          this.form.setErrors({
-            "auth": "Incorrect username or password"
-          });
-                      });
-
-  }
+  
+  
   onBack() {
     this.router.navigate(["home"]);
   }

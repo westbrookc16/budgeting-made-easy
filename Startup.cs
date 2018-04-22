@@ -42,7 +42,7 @@ namespace budgetmanagementAngular
                 configuration.RootPath = "ClientApp/dist";
             });
             // Add ASP.NET Identity support
-            services.AddIdentity<applicationUser, IdentityRole>(
+            /*services.AddIdentity<applicationUser, IdentityRole>(
                 opts =>
                 {
                     opts.Password.RequireDigit = true;
@@ -80,6 +80,16 @@ namespace budgetmanagementAngular
                     ValidateAudience = true
                 };
                 cfg.IncludeErrorDetails = true;
+            });*/
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://budgetingmadeeasy.auth0.com/";
+                options.Audience = "budgetingmadeeasy";
             });
         }
 

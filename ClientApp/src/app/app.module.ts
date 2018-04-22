@@ -1,37 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { RootingModule } from '../app/rooting/rooting.module';
-import { Router, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
+import { BudgetModule } from './budget/budget.module';
+import { CallbackComponent } from './callback/callback.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { BudgetComponent } from './budget/budgetComponent/budget.component';
-import { componentFactoryName } from '@angular/compiler';
-import { Component } from '@angular/core/src/metadata/directives';
-import { BudgetCategoryComponent } from './budget/budgetCategoryComponent/budgetCategory.component';
+import { HomeComponent } from './home/home.component';
 //import { CategoryListComponent } from './category-list/category-list.component';
-
 //import { AddCategoryComponent } from './add-category/add-category.component';
 //import { CategoryService } from './services/category.service';
 import { LoginComponent } from './login/login.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthService } from './services/auth.service';
 
-import { AuthInterceptor } from './services/auth.interceptor';
-import { AuthResponseInterceptor } from './services/auth.response.interceptor';
-import { BudgetRootingModule } from './budget/budget-rooting/budget-rooting.module';
-import { AddCategoryComponent } from './budget/add-categoryComponent/add-category.component';
-import { CategoryService } from './budget/services/category.service';
-import { BudgetService } from './budget/services/budget.service';
-import { BudgetModule } from './budget/budget.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    CallbackComponent,
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
@@ -39,16 +30,13 @@ import { BudgetModule } from './budget/budget.module';
     LoginComponent
 
   ],
-  providers: [AuthService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  },
+  providers: [AuthService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthResponseInterceptor,
+      useClass: AuthInterceptor,
       multi: true
-    } 
+    }
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
