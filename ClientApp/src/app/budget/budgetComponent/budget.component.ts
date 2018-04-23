@@ -55,8 +55,9 @@ this.catService.deletedCategory$.subscribe(result => {
 });
 this.catService.newCat$.subscribe(result => {
   this.currBudget.totalSpent += result.amount;
-});
-
+    });
+    
+    
 this.route.paramMap.subscribe(params => {
   if (params.get('month') == null) {
     this.currBudget.month = new Date().getMonth() + 1;
