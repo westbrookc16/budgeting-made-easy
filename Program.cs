@@ -25,8 +25,7 @@ namespace budgetmanagementAngular
                 try
                 {
                     var context = services.GetRequiredService< budgetContext>();
-                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    var userManager = services.GetRequiredService<UserManager<applicationUser>>();
+                    
 
                     //                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     

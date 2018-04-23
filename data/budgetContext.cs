@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 namespace budgetmanagementAngular.data
 {
-    public class budgetContext : IdentityDbContext<applicationUser>
+    public class budgetContext : DbContext
     {
         public budgetContext(DbContextOptions options) : base(options) { }
         public DbSet<budget> budgets { get; set; }
         public DbSet<budgetCategory> budgetCategories { get; set; }
-        public DbSet<Token> tokens { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

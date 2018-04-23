@@ -18,7 +18,7 @@ namespace budgetmanagementAngular.data
         public decimal totalIncome { get; set; }
         public DateTime? creationDate { get; set; }
         public string userID { get; set; }
-        public applicationUser user { get; set; }
+        
     
     }
 }

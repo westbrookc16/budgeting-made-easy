@@ -17,16 +17,15 @@ namespace budgetmanagementAngular.Controllers
     [Route("api/[controller]")]
     public class budgetController : BaseApiController
     {
-        
-        
-        
-        public budgetController(budgetContext db, RoleManager<IdentityRole> roleManager,
-            UserManager<applicationUser> userManager,
+
+
+
+        public budgetController(budgetContext db,
             IConfiguration configuration
             )
-            : base(db, roleManager, userManager, configuration)
+            : base(db, configuration)
         {
-            
+
 
         }
         // GET: api/<controller>
@@ -42,16 +41,17 @@ namespace budgetmanagementAngular.Controllers
                 c.month = b.month;
                 c.year = b.year;
                 b.creationDate = DateTime.Now;
-                c.userID = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                string userId = User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value;
+                c.userID = userId;
 
                 DbContext.budgets.Add(c);
                 DbContext.SaveChanges();
-                
+
                 return new JsonResult(c, new JsonSerializerSettings() { Formatting = Formatting.Indented });
             }
             else
             {
-                var q = from bdg in DbContext.budgets where bdg.budgetID==b.budgetID select bdg;
+                var q = from bdg in DbContext.budgets where bdg.budgetID == b.budgetID select bdg;
                 budget updatedBudget = new budget();
                 updatedBudget = q.Single();
                 updatedBudget.totalIncome = b.totalIncome;
@@ -60,16 +60,16 @@ namespace budgetmanagementAngular.Controllers
 
             }
 
-            
+
 
         }
         [HttpGet("getBudget/{month}/{year}")]
-[Authorize]
+        [Authorize]
         public IActionResult getBudget(int? month = 3, int? year = 2018)
         {
 
-
-            var q = from budget in DbContext.budgets where budget.month == month && budget.year == year &&budget.userID== User.FindFirst(ClaimTypes.NameIdentifier).Value select new { budget.budgetID, budget.month, budget.year, totalSpent = budget.categories.Sum(p => p.amount), budget.totalIncome };
+            string userID = User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value;
+            var q = from budget in DbContext.budgets where budget.month == month && budget.year == year && budget.userID == userID select new { budget.budgetID, budget.month, budget.year, totalSpent = budget.categories.Sum(p => p.amount), budget.totalIncome };
             //budgetViewModel b = _mapper.Map<budgetViewModel>(q.SingleOrDefault());
 
             //}

@@ -18,7 +18,7 @@ namespace budgetmanagementAngular.Controllers
     public class budgetCategoryController : BaseApiController
     {
         
-        public budgetCategoryController(budgetContext db,RoleManager<IdentityRole> roleManager, UserManager<applicationUser> userManager, IConfiguration configuration):base(db,roleManager,userManager,configuration)
+        public budgetCategoryController(budgetContext db,IConfiguration configuration):base(db,configuration)
             {
             
 

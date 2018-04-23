@@ -10,9 +10,10 @@ using budgetmanagementAngular.data;
 namespace budgetmanagementAngular.Migrations
 {
     [DbContext(typeof(budgetContext))]
-    partial class budgetContextModelSnapshot : ModelSnapshot
+    [Migration("20180422195406_deleteUsers")]
+    partial class deleteUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

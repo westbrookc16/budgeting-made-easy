@@ -17,15 +17,13 @@ namespace budgetmanagementAngular.Controllers
         #region Constructor
         public BaseApiController(
             budgetContext context,
-            RoleManager<IdentityRole> roleManager,
-            UserManager<applicationUser> userManager,
+            
             IConfiguration configuration
             )
         {
             // Instantiate the required classes through DI
             DbContext = context;
-            RoleManager = roleManager;
-            UserManager = userManager;
+
             Configuration = configuration;
 
             // Instantiate a single JsonSerializerSettings object
@@ -40,16 +38,6 @@ namespace budgetmanagementAngular.Controllers
         
         #region Shared Properties
         protected budgetContext DbContext { get; private set; }
-        protected RoleManager<IdentityRole> RoleManager
-        {
-            get; private
-set;
-        }
-        protected UserManager<applicationUser> UserManager
-        {
-            get;
-            private set;
-        }
         protected IConfiguration Configuration { get; private set; }
         protected JsonSerializerSettings JsonSettings
         {
