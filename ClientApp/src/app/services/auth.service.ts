@@ -11,10 +11,8 @@ export class AuthService {
 
   userProfile: any;
   refreshSubscription: any;
-  lock = new Auth0Lock(
-    'JbxR11ABEvDK8zLue4_ki_DQU5F7nwva',
-    'budgetingmadeeasy.auth0.com'
-  );
+  
+    
   auth0 = new auth0.WebAuth({
     clientID: AUTH_CONFIG.clientID,
     domain: AUTH_CONFIG.domain,

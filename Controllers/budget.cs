@@ -74,7 +74,8 @@ namespace budgetmanagementAngular.Controllers
 
             //}
             //budgetViewModel b = new budgetViewModel();
-
+            if (q.Count() == 0)
+                return new JsonResult(new budget() { budgetID = -1, totalIncome = 0, month = month.GetValueOrDefault(), year = year.GetValueOrDefault(), creationDate=DateTime.Now }, new JsonSerializerSettings() { Formatting = Formatting.Indented });
             return new JsonResult(q.SingleOrDefault(), new JsonSerializerSettings() { Formatting = Formatting.Indented });
         }
     }
