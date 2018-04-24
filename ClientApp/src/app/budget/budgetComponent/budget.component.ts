@@ -62,12 +62,12 @@ this.route.paramMap.subscribe(params => {
   if (params.get('month') == null) {
     this.currBudget.month = new Date().getMonth() + 1;
     this.currBudget.year = new Date().getFullYear();
-    this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
+    this.budgetService.getBudget(this.currBudget.month.toString(), this.currBudget.year.toString());
   }
   else {
     this.currBudget.month = +params.get('month');
     this.currBudget.year = +params.get('year');
-    this.budgetService.getBudget(this.currBudget.month, this.currBudget.year);
+    this.budgetService.getBudget(this.currBudget.month.toString(), this.currBudget.year.toString());
   }
 });  
     

@@ -9,7 +9,7 @@ export class BudgetService {
   private currBudgetSource: Subject<Budget> = new Subject<Budget>();
   currBudget$ = this.currBudgetSource.asObservable();
   constructor( @Inject('BASE_URL') private baseUrl: string, private http: HttpClient) { }
-  getBudget(month: number, year: number) {
+  getBudget(month: string, year: string) {
 
     let url = this.baseUrl + 'api/budget/getbudget/' + month + '/' + year;
 
