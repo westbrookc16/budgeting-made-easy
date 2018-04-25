@@ -14,7 +14,7 @@ import { NgModuleCompileResult } from '@angular/compiler/src/ng_module_compiler'
   styleUrls: ['./budgetCategory.component.css'],
   //providers: [CategoryService]
 })
-export class BudgetCategoryComponent implements OnInit, OnChanges {
+export class BudgetCategoryComponent implements OnInit {
   categories: BudgetCategory[] = [];
   deleteCategory(cat: BudgetCategory) {
     if (confirm("are you sure you want to delete the " + cat.name + ' category? Click OK to delete.'))
@@ -33,6 +33,7 @@ export class BudgetCategoryComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.budgetService.currBudget$.subscribe(result => {
+      console.log("categories here.");
       if (result == null || result.budgetID == -1) {
         this.categories = [];
       }
