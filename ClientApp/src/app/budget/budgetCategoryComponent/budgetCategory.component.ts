@@ -60,7 +60,5 @@ export class BudgetCategoryComponent implements OnInit {
       }
     });
   }
-  ngOnChanges() {
-
-  }
+  
 }
