@@ -44,13 +44,16 @@ export class BudgetComponent implements OnInit {
     });
     this.catService.deletedCategory$.subscribe(result => {
       this.currBudget.totalSpent -= result.amount;
+      this.currBudget.totalLeftToBudget = this.currBudget.totalIncome - this.currBudget.totalSpent;
       console.log("deleted category subscription");
     });
     this.catService.difference$.subscribe(res => {
       this.currBudget.totalSpent = this.currBudget.totalSpent + res;
+      this.currBudget.totalLeftToBudget = this.currBudget.totalIncome - this.currBudget.totalSpent;
     })
     this.catService.newCat$.subscribe(result => {
       this.currBudget.totalSpent += result.amount;
+      this.currBudget.totalLeftToBudget = this.currBudget.totalIncome - this.currBudget.totalSpent;
     });
 
 

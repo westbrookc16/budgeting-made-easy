@@ -36,10 +36,10 @@
 
     </tr>
     <tr><td><label for="txtIncome">Total Monthly Income</label></td><td><input type="text" currencyMask id="txtIncome" [(ngModel)]="currBudget.totalIncome" /></td></tr>
-    <div aria-live="polite" aria-atomic="true">
+    
     <tr><td>Total  Spent</td><td>{{currBudget.totalSpent |currency}}</td></tr>
-    <tr><td>Total Left to Budget</td><td>{{currBudget.totalIncome-currBudget.totalSpent |currency}}</td></tr>
-      </div>
+    <tr aria-live="polite" aria-atomic="true"><td>Total Left to Budget</td><td>{{currBudget.totalLeftToBudget |currency}}</td></tr>
+      
       </table>
   <input type="button" id="btnadd" value="Add" (click)="add()" />
   <app-budget-category></app-budget-category>
