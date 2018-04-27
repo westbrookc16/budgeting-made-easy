@@ -17,12 +17,12 @@ namespace budgetmanagementAngular.Controllers
     [Route("api/[controller]")]
     public class budgetCategoryController : BaseApiController
     {
-        
-        public budgetCategoryController(budgetContext db,IConfiguration configuration):base(db,configuration)
-            {
-            
 
-            }
+        public budgetCategoryController(budgetContext db, IConfiguration configuration) : base(db, configuration)
+        {
+
+
+        }
         [HttpPut("delete")]
         [Authorize]
         public JsonResult delete([FromBody] budgetCategory cat)
@@ -30,14 +30,29 @@ namespace budgetmanagementAngular.Controllers
 
             DbContext.budgetCategories.Attach(cat);
             DbContext.budgetCategories.Remove(cat);
-           DbContext.SaveChanges();
+            DbContext.SaveChanges();
             return new JsonResult(cat, new JsonSerializerSettings() { Formatting = Formatting.Indented });
+        }
+        [HttpPost("edit")]
+        [Authorize]
+        public decimal edit([FromBody] budgetCategory c)
+        {
+
+            var q = from rec in DbContext.budgetCategories where rec.budgetCategoryID == c.budgetCategoryID select rec;
+            budgetCategory cat = q.SingleOrDefault();
+            decimal oldAmount = cat.amount;
+            cat.name = c.name;
+            cat.amount = c.amount;
+            DbContext.SaveChanges();
+            return c.amount - oldAmount;
         }
         [HttpPost("add")]
 
         [Authorize]
-            public JsonResult add([FromBody]budgetCategory c) {
-            if (c.budgetCategoryID == -1) {
+        public JsonResult add([FromBody]budgetCategory c)
+        {
+            if (c.budgetCategoryID == -1)
+            {
                 budgetCategory newCat = new budgetCategory();
                 newCat.name = c.name;
                 newCat.amount = c.amount;
@@ -61,7 +76,7 @@ namespace budgetmanagementAngular.Controllers
         [Authorize]
         public JsonResult getAll(int budgetID)
         {
-            
+
             var q = from c in DbContext.budgetCategories where c.budgetID == budgetID select c;
             return new JsonResult(q.ToList(), new JsonSerializerSettings() { Formatting = Formatting.Indented });
         }

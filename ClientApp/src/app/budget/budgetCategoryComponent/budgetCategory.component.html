@@ -2,13 +2,14 @@
   <h1>Categories for {{month}}/{{year}}</h1>
   <table>
     <thead>
-      <tr><td>Name</td><td>Amount</td><td>Delete</td></tr>
+      <tr><td>Name</td><td>Amount</td><td>Edit</td><td>Delete</td></tr>
 
     </thead>
     <tbody>
       <tr *ngFor="let i of categories">
         <td>{{i.name}}
-        <td><input currencyMask type="text" [(ngModel)]="i.amount" /></td>
+        <td><input currencyMask type="text" title="{{i.name}}" [(ngModel)]="i.amount" /></td>
+        <td><button  (click)="edit(i)" >Edit</button></td>
         <td><button value="Delete" (click)="deleteCategory(i)">Delete</button></td>
       </tr>
     </tbody>

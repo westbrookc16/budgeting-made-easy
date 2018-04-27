@@ -61,4 +61,11 @@ export class BudgetCategoryComponent implements OnInit {
     });
   }
   
+
+
+
+//}
+edit(c: BudgetCategory){
+  this.catService.edit(c);
+}
 }

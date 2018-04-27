@@ -21,11 +21,11 @@ export class BudgetComponent implements OnInit {
 
   }
   changeBudget() {
-    
+
     this.router.navigateByUrl('budget/' + this.currBudget.month + '/' + this.currBudget.year);
   }
   add() {
-    
+
     this.budgetService.add(this.currBudget);
   }
   profile: any;
@@ -40,12 +40,15 @@ export class BudgetComponent implements OnInit {
         result.totalSpent = 0;
 
       this.currBudget = result;
-      
+
     });
     this.catService.deletedCategory$.subscribe(result => {
       this.currBudget.totalSpent -= result.amount;
       console.log("deleted category subscription");
     });
+    this.catService.difference$.subscribe(res => {
+      this.currBudget.totalSpent = this.currBudget.totalSpent + res;
+    })
     this.catService.newCat$.subscribe(result => {
       this.currBudget.totalSpent += result.amount;
     });

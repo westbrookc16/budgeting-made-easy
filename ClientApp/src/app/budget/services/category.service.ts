@@ -14,9 +14,15 @@ export class CategoryService {
   newCat$ = this.newCatSource.asObservable();
   private deletedCatSource: Subject<BudgetCategory> = new Subject<BudgetCategory>();
   deletedCategory$ = this.deletedCatSource.asObservable();
+  private difference: Subject<number> = new Subject<number>();
+  difference$ = this.difference.asObservable();
   constructor( @Inject('BASE_URL') private baseUrl: string, private http: HttpClient) { }
 
-
+  edit(c: BudgetCategory) {
+    this.http.post<number>(this.baseUrl + 'api/budgetcategory/edit', c).subscribe(res => {
+      this.difference.next(res);
+    });
+  }
   deleteBudgetCategory(cat: BudgetCategory) {
     this.http.put < BudgetCategory>(this.baseUrl + 'api/budgetcategory/delete', cat).subscribe(result => {
       this.deletedCatSource.next(result);
