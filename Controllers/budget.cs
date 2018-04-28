@@ -47,7 +47,7 @@ namespace budgetmanagementAngular.Controllers
                 DbContext.budgets.Add(c);
                 DbContext.SaveChanges();
 
-                return new JsonResult(c, new JsonSerializerSettings() { Formatting = Formatting.Indented });
+                return new JsonResult(new {totalIncome=c.totalIncome,totalSpent=0,totalLeftToBudget=0,budgetID=c.budgetID }, new JsonSerializerSettings() { Formatting = Formatting.Indented });
             }
             else
             {

@@ -40,7 +40,7 @@ export class BudgetComponent implements OnInit {
         result.totalSpent = 0;
 
       this.currBudget = result;
-
+      this.currBudget.totalLeftToBudget = this.currBudget.totalIncome - this.currBudget.totalSpent;
     });
     this.catService.deletedCategory$.subscribe(result => {
       this.currBudget.totalSpent -= result.amount;

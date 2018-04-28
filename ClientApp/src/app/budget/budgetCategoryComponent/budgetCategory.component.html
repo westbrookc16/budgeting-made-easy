@@ -8,7 +8,7 @@
     <tbody>
       <tr *ngFor="let i of categories">
         <td>{{i.name}}
-        <td><input currencyMask type="text" title="{{i.name}}" [(ngModel)]="i.amount" /></td>
+        <td><input type="number" title="{{i.name}}" [(ngModel)]="i.amount" /></td>
         <td><button  (click)="edit(i)" >Edit</button></td>
         <td><button value="Delete" (click)="deleteCategory(i)">Delete</button></td>
       </tr>

@@ -1,8 +1,11 @@
 <div *ngIf="budgetID>0">
   <h1>add Category</h1>
-  <table>
+  <fieldset>
+    <legend>Add New Category</legend>
+    <table>
     <tr><td><label for="name">name</label></td><td><input id="name" [(ngModel)]="cat.name" /></td></tr>
-    <tr><td><label for="amount">Amount</label></td><td><input id="amount" [(ngModel)]="cat.amount" currencyMask /></td></tr>
+    <tr><td><label for="amount">Amount</label></td><td><input id="amount" [(ngModel)]="cat.amount" /></td></tr>
   </table>
+  </fieldset>
   <input type="button" id="btnAdd" value="Add" (click)="add()"/>
 </div>

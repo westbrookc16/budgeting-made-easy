@@ -28,7 +28,12 @@ export class AddCategoryComponent implements OnInit {
       else
       this.budgetID = result.budgetID;
     });
+    this.catservice.newCat$.subscribe(res => {
+      this.cat.name = '';
+      this.cat.amount = 0;
 
+      
+    });
   }
 
 }
