@@ -6,17 +6,18 @@ import { RootingModule } from '../app/rooting/rooting.module';
 import { AppComponent } from './app.component';
 import { BudgetModule } from './budget/budget.module';
 import { CallbackComponent } from './callback/callback.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+
+
 import { HomeComponent } from './home/home.component';
-//import { CategoryListComponent } from './category-list/category-list.component';
-//import { AddCategoryComponent } from './add-category/add-category.component';
-//import { CategoryService } from './services/category.service';
+
+
+
 import { LoginComponent } from './login/login.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthService } from './services/auth.service';
 import { FocusDirective } from './focus.directive';
+import { HelpComponent } from './help/help.component';
 
 
 
@@ -26,10 +27,10 @@ import { FocusDirective } from './focus.directive';
     CallbackComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
+
     LoginComponent,
-    FocusDirective
+    FocusDirective,
+    HelpComponent
     
 
   ],
