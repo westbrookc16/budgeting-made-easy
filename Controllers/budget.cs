@@ -41,8 +41,8 @@ namespace budgetmanagementAngular.Controllers
                 c.month = b.month;
                 c.year = b.year;
                 b.creationDate = DateTime.Now;
-                string userId = User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value;
-                c.userID = userId;
+                
+                c.userID = userID;
 
                 DbContext.budgets.Add(c);
                 DbContext.SaveChanges();
@@ -56,7 +56,8 @@ namespace budgetmanagementAngular.Controllers
                 updatedBudget = q.Single();
                 updatedBudget.totalIncome = b.totalIncome;
                 DbContext.SaveChanges();
-                return new JsonResult(updatedBudget, JsonSettings);
+                var r = from rec in DbContext.budgets where rec.budgetID == updatedBudget.budgetID select new { rec.budgetID, rec.totalIncome, totalSpent = rec.categories.Sum(a => a.amount) };
+                return new JsonResult(r.FirstOrDefault(), JsonSettings);
 
             }
 
@@ -68,7 +69,7 @@ namespace budgetmanagementAngular.Controllers
         public IActionResult getBudget(int? month = 3, int? year = 2018)
         {
 
-            string userID = User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value;
+            
             var q = from budget in DbContext.budgets where budget.month == month && budget.year == year && budget.userID == userID select new { budget.budgetID, budget.month, budget.year, totalSpent = budget.categories.Sum(p => p.amount), budget.totalIncome };
             //budgetViewModel b = _mapper.Map<budgetViewModel>(q.SingleOrDefault());
 

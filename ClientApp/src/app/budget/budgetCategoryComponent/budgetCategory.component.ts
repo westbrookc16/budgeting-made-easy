@@ -7,6 +7,7 @@ import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { CategoryService } from '../services/category.service';
 import { BudgetService } from '../services/budget.service';
 import { NgModuleCompileResult } from '@angular/compiler/src/ng_module_compiler';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-budget-category',
@@ -15,6 +16,7 @@ import { NgModuleCompileResult } from '@angular/compiler/src/ng_module_compiler'
   //providers: [CategoryService]
 })
 export class BudgetCategoryComponent implements OnInit {
+  
   categories: BudgetCategory[] = [];
   deleteCategory(cat: BudgetCategory) {
     if (confirm("are you sure you want to delete the " + cat.name + ' category? Click OK to delete.'))
@@ -56,6 +58,8 @@ export class BudgetCategoryComponent implements OnInit {
       for (var i = 0; i < this.categories.length; i++) {
         if (this.categories[i].budgetCategoryID == result.budgetCategoryID) {
           this.categories.splice(i, 1);
+          console.log("category removed");
+          
         }
       }
     });

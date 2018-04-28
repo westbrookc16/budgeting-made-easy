@@ -1,5 +1,6 @@
 <div id="categoryList" *ngIf="categories.length">
-  <h1>Categories for {{month}}/{{year}}</h1>
+  <h1>Categories for {{month}}/{{year}} </h1>
+  
   <table>
     <thead>
       <tr><td>Name</td><td>Amount</td><td>Edit</td><td>Delete</td></tr>
@@ -9,8 +10,8 @@
       <tr *ngFor="let i of categories">
         <td>{{i.name}}
         <td><input type="number" title="{{i.name}}" [(ngModel)]="i.amount" /></td>
-        <td><button  (click)="edit(i)" >Edit</button></td>
-        <td><button value="Delete" (click)="deleteCategory(i)">Delete</button></td>
+        <td><input type="button" (click)="edit(i)" value="Edit" /></td>
+        <td><input type="button" value="Delete" (click)="deleteCategory(i)" /></td>
       </tr>
     </tbody>
   </table>

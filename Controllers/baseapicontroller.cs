@@ -7,7 +7,8 @@ using budgetmanagementAngular.data;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace budgetmanagementAngular.Controllers
 
 {
@@ -43,6 +44,11 @@ namespace budgetmanagementAngular.Controllers
         {
             get; private
 set;
+        }
+        public string userID {
+            get {
+                return  User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier).Value;
+            }
         }
         #endregion
     }

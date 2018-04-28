@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthService } from './services/auth.service';
+import { FocusDirective } from './focus.directive';
 
 
 
@@ -27,7 +28,9 @@ import { AuthService } from './services/auth.service';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    LoginComponent
+    LoginComponent,
+    FocusDirective
+    
 
   ],
   providers: [AuthService,
@@ -44,7 +47,8 @@ import { AuthService } from './services/auth.service';
     FormsModule,
     ReactiveFormsModule,
     BudgetModule,
-    RootingModule,
+    RootingModule
+    
 
     
     
