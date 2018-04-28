@@ -1,15 +1,16 @@
 <div id="categoryList" *ngIf="categories.length">
   <h1>Categories for {{month}}/{{year}} </h1>
-  
+
   <table>
     <thead>
-      <tr><td>Name</td><td>Amount</td><td>Edit</td><td>Delete</td></tr>
+      <tr><td>Name</td><td>Amount</td><td>Is Recurring</td><td>Edit</td><td>Delete</td></tr>
 
     </thead>
     <tbody>
       <tr *ngFor="let i of categories">
         <td>{{i.name}}
         <td><input type="number" title="{{i.name}}" [(ngModel)]="i.amount" /></td>
+        <td><input type="checkbox" id="chkIsRecurring" title="Is Recurring" [(ngModel)]="i.isRecurring" /></td>
         <td><input type="button" (click)="edit(i)" value="Edit" /></td>
         <td><input type="button" value="Delete" (click)="deleteCategory(i)" /></td>
       </tr>

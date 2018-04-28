@@ -43,6 +43,7 @@ namespace budgetmanagementAngular.Controllers
             decimal oldAmount = cat.amount;
             cat.name = c.name;
             cat.amount = c.amount;
+            cat.isRecurring = c.isRecurring;
             DbContext.SaveChanges();
             return c.amount - oldAmount;
         }
@@ -57,6 +58,7 @@ namespace budgetmanagementAngular.Controllers
                 newCat.name = c.name;
                 newCat.amount = c.amount;
                 newCat.budgetID = c.budgetID;
+                newCat.isRecurring = c.isRecurring;
                 DbContext.budgetCategories.Add(newCat);
                 DbContext.SaveChanges();
                 return new JsonResult(newCat, new JsonSerializerSettings() { Formatting = Formatting.Indented });

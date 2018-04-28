@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Data.SqlClient;
 using budgetmanagementAngular.data;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+using Microsoft.EntityFrameworkCore;
 namespace budgetmanagementAngular.Controllers
 {
     [Route("api/[controller]")]
@@ -46,8 +47,12 @@ namespace budgetmanagementAngular.Controllers
 
                 DbContext.budgets.Add(c);
                 DbContext.SaveChanges();
-
-                return new JsonResult(new {totalIncome=c.totalIncome,totalSpent=0,totalLeftToBudget=0,budgetID=c.budgetID }, new JsonSerializerSettings() { Formatting = Formatting.Indented });
+                //insert categories that are recurring from the previous month
+                DbContext.Database.ExecuteSqlCommand("insert into budgetCategories (budgetID, name, amount, isRecurring) select @budgetID, name, amount, isRecurring from budgetCategories c inner join budgets b on c.budgetID=b.budgetID where b.month=@month-1 and b.year=@year and isRecurring=1",new SqlParameter("@budgetID",c.budgetID),new SqlParameter("@month",c.month),new SqlParameter("@year",c.year) );
+                DbContext.SaveChanges();
+                var r = from newBudget in DbContext.budgets where newBudget.budgetID == c.budgetID select new { newBudget.totalIncome, newBudget.budgetID, newBudget.month, newBudget.year, totalSpent = newBudget.categories.Sum(a => a.amount), totalLeftToBudget = newBudget.totalIncome-newBudget.categories.Sum(a=>a.amount)  };
+                return new JsonResult(r.FirstOrDefault(), JsonSettings);
+                
             }
             else
             {

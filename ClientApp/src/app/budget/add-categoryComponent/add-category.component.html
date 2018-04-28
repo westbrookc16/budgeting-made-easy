@@ -3,9 +3,10 @@
   <fieldset>
     <legend>Add New Category</legend>
     <table>
-    <tr><td><label for="name">name</label></td><td><input id="name" [(ngModel)]="cat.name" /></td></tr>
-    <tr><td><label for="amount">Amount</label></td><td><input id="amount" [(ngModel)]="cat.amount" /></td></tr>
-  </table>
+      <tr><td><label for="name">name</label></td><td><input id="name" [(ngModel)]="cat.name" /></td></tr>
+      <tr><td><label for="amount">Amount</label></td><td><input id="amount" [(ngModel)]="cat.amount" /></td></tr>
+      <tr><td>Is Recurring</td><td><input type="checkbox" [(ngModel)]="cat.isRecurring" aria-label="Is Recurring" /></td></tr>
+    </table>
   </fieldset>
-  <input type="button" id="btnAdd" value="Add" (click)="add()"/>
+  <input type="button" id="btnAdd" value="Add" (click)="add()" />
 </div>

@@ -31,7 +31,7 @@ export class AddCategoryComponent implements OnInit {
     this.catservice.newCat$.subscribe(res => {
       this.cat.name = '';
       this.cat.amount = 0;
-
+      this.cat.isRecurring = false;
       
     });
   }
