@@ -25,10 +25,10 @@ namespace budgetmanagementAngular
                 try
                 {
                     var context = services.GetRequiredService< budgetContext>();
-                    
+
 
                     //                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    
+                    context.Database.Migrate();                    
                     //DbInitializer.Initialize(context,roleManager,userManager);
                 }
                 catch (Exception ex)
