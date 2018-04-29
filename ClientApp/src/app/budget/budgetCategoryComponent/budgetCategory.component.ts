@@ -35,7 +35,7 @@ export class BudgetCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.budgetService.currBudget$.subscribe(result => {
-      console.log("categories here.");
+      
       if (result == null || result.budgetID == -1) {
         this.categories = [];
       }
