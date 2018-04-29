@@ -37,7 +37,8 @@ namespace budgetmanagementAngular
             else
                 services.AddDbContext<budgetContext>(options =>
     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            // Automatically perform database migration
+            services.BuildServiceProvider().GetService<DbContext>().Database.Migrate();
             services.AddAutoMapper();
             services.AddMvc();
 
