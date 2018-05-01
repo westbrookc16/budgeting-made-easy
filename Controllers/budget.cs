@@ -48,7 +48,7 @@ namespace budgetmanagementAngular.Controllers
                 DbContext.budgets.Add(c);
                 DbContext.SaveChanges();
                 //insert categories that are recurring from the previous month
-                DbContext.Database.ExecuteSqlCommand("insert into budgetCategories (budgetID, name, amount, isRecurring) select @budgetID, name, amount, isRecurring from budgetCategories c inner join budgets b on c.budgetID=b.budgetID where b.month=@month-1 and b.year=@year and isRecurring=1",new SqlParameter("@budgetID",c.budgetID),new SqlParameter("@month",c.month),new SqlParameter("@year",c.year) );
+                DbContext.Database.ExecuteSqlCommand("insert into budgetCategories (budgetID, name, amount, isRecurring) select @budgetID, name, amount, isRecurring from budgetCategories c inner join budgets b on c.budgetID=b.budgetID where b.month=@month-1 and b.year=@year and isRecurring=1 and b.userID=@userID",new SqlParameter("@budgetID",c.budgetID),new SqlParameter("@month",c.month),new SqlParameter("@year",c.year),new SqlParameter("@userID",userID));
                 DbContext.SaveChanges();
                 var r = from newBudget in DbContext.budgets where newBudget.budgetID == c.budgetID select new { newBudget.totalIncome, newBudget.budgetID, newBudget.month, newBudget.year, totalSpent = newBudget.categories.Sum(a => a.amount), totalLeftToBudget = newBudget.totalIncome-newBudget.categories.Sum(a=>a.amount)  };
                 return new JsonResult(r.FirstOrDefault(), JsonSettings);
