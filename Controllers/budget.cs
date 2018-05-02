@@ -42,17 +42,17 @@ namespace budgetmanagementAngular.Controllers
                 c.month = b.month;
                 c.year = b.year;
                 b.creationDate = DateTime.Now;
-                
+
                 c.userID = userID;
 
                 DbContext.budgets.Add(c);
                 DbContext.SaveChanges();
                 //insert categories that are recurring from the previous month
-                DbContext.Database.ExecuteSqlCommand("insert into budgetCategories (budgetID, name, amount, isRecurring) select @budgetID, name, amount, isRecurring from budgetCategories c inner join budgets b on c.budgetID=b.budgetID where b.month=@month-1 and b.year=@year and isRecurring=1 and b.userID=@userID",new SqlParameter("@budgetID",c.budgetID),new SqlParameter("@month",c.month),new SqlParameter("@year",c.year),new SqlParameter("@userID",userID));
+                DbContext.Database.ExecuteSqlCommand("insert into budgetCategories (budgetID, name, amount, isRecurring) select @budgetID, name, amount, isRecurring from budgetCategories c inner join budgets b on c.budgetID=b.budgetID where b.month=@month-1 and b.year=@year and isRecurring=1 and b.userID=@userID", new SqlParameter("@budgetID", c.budgetID), new SqlParameter("@month", c.month), new SqlParameter("@year", c.year), new SqlParameter("@userID", userID));
                 DbContext.SaveChanges();
-                var r = from newBudget in DbContext.budgets where newBudget.budgetID == c.budgetID select new { newBudget.totalIncome, newBudget.budgetID, newBudget.month, newBudget.year, totalSpent = newBudget.categories.Sum(a => a.amount), totalLeftToBudget = newBudget.totalIncome-newBudget.categories.Sum(a=>a.amount)  };
+                var r = from newBudget in DbContext.budgets.Include(cat=>cat.categories) where newBudget.budgetID == c.budgetID select newBudget;
                 return new JsonResult(r.FirstOrDefault(), JsonSettings);
-                
+
             }
             else
             {
@@ -61,7 +61,7 @@ namespace budgetmanagementAngular.Controllers
                 updatedBudget = q.Single();
                 updatedBudget.totalIncome = b.totalIncome;
                 DbContext.SaveChanges();
-                var r = from rec in DbContext.budgets where rec.budgetID == updatedBudget.budgetID select new { rec.budgetID, rec.totalIncome, totalSpent = rec.categories.Sum(a => a.amount) };
+                var r = from rec in DbContext.budgets.Include(c=>c.categories) where rec.budgetID == updatedBudget.budgetID select rec;
                 return new JsonResult(r.FirstOrDefault(), JsonSettings);
 
             }
@@ -74,14 +74,14 @@ namespace budgetmanagementAngular.Controllers
         public IActionResult getBudget(int? month = 3, int? year = 2018)
         {
 
-            
-            var q = from budget in DbContext.budgets where budget.month == month && budget.year == year && budget.userID == userID select new { budget.budgetID, budget.month, budget.year, totalSpent = budget.categories.Sum(p => p.amount), budget.totalIncome };
+
+            var q = from budget in DbContext.budgets.Include(c=>c.categories) where budget.month == month && budget.year == year && budget.userID == userID select budget;
             //budgetViewModel b = _mapper.Map<budgetViewModel>(q.SingleOrDefault());
 
             //}
             //budgetViewModel b = new budgetViewModel();
             if (q.Count() == 0)
-                return new JsonResult(new budget() { budgetID = -1, totalIncome = 0, month = month.GetValueOrDefault(), year = year.GetValueOrDefault(), creationDate=DateTime.Now }, new JsonSerializerSettings() { Formatting = Formatting.Indented });
+                return new JsonResult(new budget() { budgetID = -1, totalIncome = 0, month = month.GetValueOrDefault(), year = year.GetValueOrDefault(), creationDate = DateTime.Now }, new JsonSerializerSettings() { Formatting = Formatting.Indented });
             return new JsonResult(q.SingleOrDefault(), new JsonSerializerSettings() { Formatting = Formatting.Indented });
         }
     }
