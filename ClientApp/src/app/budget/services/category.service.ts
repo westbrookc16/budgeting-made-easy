@@ -30,7 +30,7 @@ export class CategoryService {
     //this.deletedCatSource.next(cat);
   }
   getBudgetCategories(budgetID: number) {
-    const url = this.baseUrl + 'api/budgetcategory/getAll/' + budgetID;
+    const url = this.baseUrl + 'api/budgetcategory/getAll/' + budgetID + '?id=' + new Date().toUTCString();
 
     return this.http.get<BudgetCategory[]>(url);
   }
