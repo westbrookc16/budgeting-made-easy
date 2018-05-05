@@ -16,7 +16,7 @@ export class CategoryService {
   deletedCategory$ = this.deletedCatSource.asObservable();
   private difference: Subject<number> = new Subject<number>();
   difference$ = this.difference.asObservable();
-  constructor( @Inject('BASE_URL') private baseUrl: string, private http: HttpClient) { }
+  constructor(@Inject('BASE_URL') private baseUrl: string, private http: HttpClient) { }
 
   edit(c: BudgetCategory) {
     this.http.post<number>(this.baseUrl + 'api/budgetcategory/edit', c).subscribe(res => {
@@ -24,17 +24,17 @@ export class CategoryService {
     });
   }
   deleteBudgetCategory(cat: BudgetCategory) {
-    this.http.put < BudgetCategory>(this.baseUrl + 'api/budgetcategory/delete', cat).subscribe(result => {
+    this.http.put<BudgetCategory>(this.baseUrl + 'api/budgetcategory/delete', cat).subscribe(result => {
       this.deletedCatSource.next(result);
     });
     //this.deletedCatSource.next(cat);
   }
   getBudgetCategories(budgetID: number) {
-    const url = this.baseUrl + 'api/budgetcategory/getAll/' + budgetID + '?id=' + new Date().toUTCString();
+    const url = this.baseUrl + 'api/budgetcategory/getAll/' + budgetID + '?id=' + +new Date();
 
     return this.http.get<BudgetCategory[]>(url);
   }
-  
+
   add(c: BudgetCategory) {
 
     this.http.post<BudgetCategory>(this.baseUrl + 'api/budgetCategory/add', c).subscribe(result => {

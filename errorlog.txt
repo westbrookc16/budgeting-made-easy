@@ -1,0 +1,86 @@
+Microsoft Windows [Version 10.0.16299.371]
+(c) 2017 Microsoft Corporation. All rights reserved.
+
+C:\Users\cHRIS wESTBROOK>cd c:\dev\budgetmanagementangular
+
+c:\dev\budgetmanagementAngular>git add *.cs
+
+c:\dev\budgetmanagementAngular>git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   Program.cs
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        deploy.txt
+        git.txt
+
+
+c:\dev\budgetmanagementAngular>git commit -m "Changed startup file to migrate database."
+[master a05bab5] Changed startup file to migrate database.
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+c:\dev\budgetmanagementAngular>git push
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 349 bytes | 349.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/westbrookc16/budgetManagementAngular.git
+   867d7b4..a05bab5  master -> master
+
+c:\dev\budgetmanagementAngular>git push azure master > errorlog.txt
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 349 bytes | 349.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Updating branch 'master'.
+remote: Updating submodules.
+remote: Preparing deployment for commit id 'a05bab500b'.
+remote: Generating deployment script.
+remote: Running deployment command...
+remote: Handling ASP.NET Core Web Application deployment.
+remote:   Restore completed in 221 ms for D:\home\site\repository\budgetmanagementAngular.csproj.
+remote:   Restore completed in 221 ms for D:\home\site\repository\budgetmanagementAngular.csproj.
+remote:   Restore completed in 377.13 ms for D:\home\site\repository\budgetmanagementAngular.csproj.
+remote: Microsoft (R) Build Engine version 15.7.145.53551 for .NET Core
+remote: Copyright (C) Microsoft Corporation. All rights reserved.
+remote:
+remote:   Restore completed in 234.56 ms for D:\home\site\repository\budgetmanagementAngular.csproj.
+remote:   Restore completed in 234.56 ms for D:\home\site\repository\budgetmanagementAngular.csproj.
+remote:   Restore completed in 424.17 ms for D:\home\site\repository\budgetmanagementAngular.csproj.
+remote:   You are working with a preview version of the .NET Core SDK. You can define the SDK version via a global.json file in the current project. More at https://go.microsoft.com/fwlink/?linkid=869452
+remote: ...
+remote:   budgetmanagementAngular -> D:\home\site\repository\bin\Release\netcoreapp2.1\budgetmanagementAngular.dll
+remote: .......................................................................................................................
+remote:   npm WARN deprecated nodemailer@2.7.2: All versions below 4.0.1 of Nodemailer are deprecated. See https://nodemailer.com/status/
+remote:   npm WARN deprecated node-uuid@1.4.8: Use uuid module instead
+remote:   npm WARN deprecated socks@1.1.10: If using 2.x branch, please upgrade to at least 2.1.6 to avoid a serious bug with socket data flow and an import issue introduced in 2.1.0
+remote:   npm WARN deprecated socks@1.1.9: If using 2.x branch, please upgrade to at least 2.1.6 to avoid a serious bug with socket data flow and an import issue introduced in 2.1.0
+remote:   npm WARN deprecated mailcomposer@4.0.1: This project is unmaintained
+remote:   npm WARN deprecated buildmail@4.0.1: This project is unmaintained
+remote: ...............................................................................................
+remote: EXEC : npm ERR! tar.unpack untar error D: \local\AppData\npm-cache\asn1\0.2.3\package.tgz [D:\home\site\repository\budgetmanagementAngular.csproj]
+remote: ..........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+remote: Command 'starter.cmd "D:\home\site\d ...' was aborted due to no output nor CPU activity for 61 seconds. You can remote:  the SCM_COMMAND_IDLE_TIMEOUT app setting (or WEBJOBS_IDLE_TIMEOUT if this is a WebJob) if needed.
+remote: starter.cmd "D:\home\site\deployments\tools\deploy.cmd"
+remote: EXEC : npm ERR! tar.unpack untar error D: \local\AppData\npm-cache\asn1\0.2.3\package.tgz [D:\home\site\repository\budgetmanagementAngular.csproj]
+remote:
+remote: Error - Changes committed to remote repository but deployment to website failed.
+To https://budgetingmadeeasy.scm.azurewebsites.net/budgetingmadeeasy.git
+   867d7b4..a05bab5  master -> master
+
+c:\dev\budgetmanagementAngular>errorlogtxt
+'errorlogtxt' is not recognized as an internal or external command,
+operable program or batch file.
+
+c:\dev\budgetmanagementAngular>errorlog.txt
+
+c:\dev\budgetmanagementAngular>
