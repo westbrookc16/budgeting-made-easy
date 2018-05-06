@@ -2,11 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Budget } from '../classes/budget';
 import { HttpClient } from '@angular/common/http';
 import { BudgetService } from '../services/budget.service';
-import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+//import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { CategoryService } from '../services/category.service';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { AuthService } from '../../services/auth.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-budget',
   templateUrl: './budget.component.html',
@@ -16,13 +17,21 @@ import { AuthService } from '../../services/auth.service';
 export class BudgetComponent implements OnInit {
 
   currBudget: Budget = new Budget();
+  budgetForm: FormGroup;
+  createForm() {
+    this.budgetForm = this.fb.group({
+      month: '',
+      year: '',
+      totalIncome: '0',
+    });
 
-  constructor(private budgetService: BudgetService, private catService: CategoryService, private route: ActivatedRoute, private router: Router, private auth: AuthService) {
-
+  }
+  constructor(private budgetService: BudgetService, private catService: CategoryService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private fb: FormBuilder) {
+    this.createForm();
   }
   changeBudget() {
 
-    this.router.navigateByUrl('budget/' + this.currBudget.month + '/' + this.currBudget.year);
+    this.router.navigateByUrl('budget/' + this.budgetForm.get('month').value + '/' + this.budgetForm.get('year').value);
   }
   add() {
 
@@ -40,6 +49,7 @@ export class BudgetComponent implements OnInit {
 
       this.currBudget = result;
       //this.currBudget.totalLeftToBudget = this.currBudget.totalIncome - this.currBudget.totalSpent;
+      this.budgetForm.patchValue(result);
     });
     this.catService.deletedCategory$.subscribe(result => {
       this.currBudget.totalSpent -= result.amount;

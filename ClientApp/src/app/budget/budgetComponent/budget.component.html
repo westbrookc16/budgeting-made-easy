@@ -1,47 +1,52 @@
 <div id="budget" aria-live="off">
 
-  
-  
-  <table>
-    <tr>
-      <td>Month</td>
-      <td>
-        <select [(ngModel)]="currBudget.month" (change)="changeBudget()">
-          <option value="1">jan</option>
-          <option value="2">Feb</option>
-          <option value="3">Mar</option>
-          <option value="4">Apr</option>
-          <option value="5">May</option>
-          <option value="6">Jun</option>
-          <option value="7">Jul</option>
-          <option value="8">aug</option>
-          <option value="9">Sep</option>
-          <option value="10">Oct</option>
-          <option value="11">Nov</option>
-          <option value="12">Dec</option>
-        </select>
-      </td>
 
-    </tr>
-    <tr>
-      <td><label for="ddlYear">Year</label></td>
-      <td>
-        <select id="ddlYear" (change)="changeBudget()" [(ngModel)]="currBudget.year">
-          <option>2017</option>
-          <option>2018</option>
-          <option>2019</option>
-          <option>2020</option>
-        </select>
-      </td>
+  <form [formGroup]="budgetForm" name="budgetForm">
+    <table>
+      <tr>
+        <td>Month</td>
+        <td>
+          <select id="ddlMonth">
+            <option value="1">jan</option>
+            <option value="2">Feb</option>
+            <option value="3">Mar</option>
+            <option value="4">Apr</option>
+            <option value="5">May</option>
+            <option value="6">Jun</option>
+            <option value="7">Jul</option>
+            <option value="8">aug</option>
+            <option value="9">Sep</option>
+            <option value="10">Oct</option>
+            <option value="11">Nov</option>
+            <option value="12">Dec</option>
+          </select>
+        </td>
 
-    </tr>
-    <tr><td><label for="txtIncome">Total Monthly Income</label></td><td><input type="text" id="txtIncome" [(ngModel)]="currBudget.totalIncome" typeof="number" /></td></tr>
-    
-    <tr><td>Total  Spent</td><td>{{currBudget.totalSpent |currency}}</td></tr>
-    <tr aria-live="polite" aria-atomic="true"><td>Total Left to Budget</td><td>{{currBudget.totalLeftToBudget |currency}}</td></tr>
-      
-      </table>  
-  <input type="button" id="btnadd" value="Submit" (click)="add()" />
-  <app-budget-category></app-budget-category>
-  <app-add-category></app-add-category>
+      </tr>
+      <tr>
+        <td><label for="ddlYear">Year</label></td>
+        <td>
+          <select id="ddlYear">
+            <option>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+          </select>
+        </td>
+
+      </tr>
+      <tr><td>&nbsp;</td><td><input type="button" (click)="changeBudget()" value="Select" /></td></tr>
+      <tr>
+      <td><label for="txtIncome">Total Monthly Income</label></td>
+      <td><input type="text" id="txtIncome"  /></td></tr>
+
+      <tr><td>Total  Spent</td><td>{{currBudget.totalSpent |currency}}</td></tr>
+      <tr aria-live="polite" aria-atomic="true"><td>Total Left to Budget</td><td>{{currBudget.totalLeftToBudget |currency}}</td></tr>
+
+    </table>
+    <input type="button" id="btnadd" value="Submit" (click)="add()" />
+  </form>
+  <div>{{budgetForm.value |json}}</div>
+    <app-budget-category></app-budget-category>
+    <app-add-category></app-add-category>
 </div>
