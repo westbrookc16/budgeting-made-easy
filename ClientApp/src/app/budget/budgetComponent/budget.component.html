@@ -6,7 +6,7 @@
       <tr>
         <td>Month</td>
         <td>
-          <select id="ddlMonth">
+          <select id="ddlMonth" formControlName="month">
             <option value="1">jan</option>
             <option value="2">Feb</option>
             <option value="3">Mar</option>
@@ -26,7 +26,7 @@
       <tr>
         <td><label for="ddlYear">Year</label></td>
         <td>
-          <select id="ddlYear">
+          <select id="ddlYear" formControlName="year">
             <option>2017</option>
             <option>2018</option>
             <option>2019</option>
@@ -38,15 +38,15 @@
       <tr><td>&nbsp;</td><td><input type="button" (click)="changeBudget()" value="Select" /></td></tr>
       <tr>
       <td><label for="txtIncome">Total Monthly Income</label></td>
-      <td><input type="text" id="txtIncome"  /></td></tr>
+      <td><input type="text" id="txtIncome" formControlName="totalIncome"  /></td></tr>
 
-      <tr><td>Total  Spent</td><td>{{currBudget.totalSpent |currency}}</td></tr>
+      <tr><td>Total  Budgeted</td><td>{{currBudget.totalSpent |currency}}</td></tr>
       <tr aria-live="polite" aria-atomic="true"><td>Total Left to Budget</td><td>{{currBudget.totalLeftToBudget |currency}}</td></tr>
 
     </table>
-    <input type="button" id="btnadd" value="Submit" (click)="add()" />
+    <input type="button" id="btnAdd" value="Submit" (click)="add()" />
   </form>
-  <div>{{budgetForm.value |json}}</div>
+  
     <app-budget-category></app-budget-category>
     <app-add-category></app-add-category>
 </div>

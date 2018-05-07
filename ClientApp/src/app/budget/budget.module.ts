@@ -11,7 +11,8 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angul
 import { BudgetRootingModule } from './budget-rooting/budget-rooting.module';
 @NgModule({
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule, CurrencyMaskModule
+    CommonModule, FormsModule, ReactiveFormsModule,
+    CurrencyMaskModule
   ],
   exports: [BudgetRootingModule],
   declarations: [BudgetCategoryComponent, BudgetComponent, AddCategoryComponent],

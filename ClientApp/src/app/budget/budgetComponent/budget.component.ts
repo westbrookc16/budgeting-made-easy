@@ -7,7 +7,7 @@ import { CategoryService } from '../services/category.service';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { AuthService } from '../../services/auth.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-budget',
   templateUrl: './budget.component.html',
@@ -24,9 +24,10 @@ export class BudgetComponent implements OnInit {
       year: '',
       totalIncome: '0',
     });
-
+    console.log("form created");
   }
   constructor(private budgetService: BudgetService, private catService: CategoryService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private fb: FormBuilder) {
+    console.log("constructor.");
     this.createForm();
   }
   changeBudget() {
@@ -43,7 +44,7 @@ export class BudgetComponent implements OnInit {
 
 
 
-
+    this.createForm();
     this.budgetService.currBudget$.subscribe(result => {
       
 
