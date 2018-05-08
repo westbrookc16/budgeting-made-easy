@@ -50,7 +50,7 @@ export class BudgetComponent implements OnInit {
     this.router.navigateByUrl('budget/' + this.budgetForm.get('month').value + '/' + this.budgetForm.get('year').value);
   }
   add() {
-
+    this.currBudget.totalIncome = this.budgetForm.get('totalIncome').value as number;
     this.budgetService.add(this.currBudget);
   }
   profile: any;
