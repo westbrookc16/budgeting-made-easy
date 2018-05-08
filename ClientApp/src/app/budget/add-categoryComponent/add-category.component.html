@@ -1,12 +1,23 @@
 <div *ngIf="budgetID>0">
   <h1>add Category</h1>
-  <fieldset>
-    <legend>Add New Category</legend>
-    <table>
-      <tr><td><label for="name">name</label></td><td><input id="name" [(ngModel)]="cat.name" /></td></tr>
-      <tr><td><label for="amount">Amount</label></td><td><input id="amount" [(ngModel)]="cat.amount" /></td></tr>
-      <tr><td>Is Recurring</td><td><input type="checkbox" [(ngModel)]="cat.isRecurring" aria-label="Is Recurring" /></td></tr>
-    </table>
-  </fieldset>
-  <input type="button" id="btnAdd" value="Add" (click)="add()" />
+  <form [formGroup]="addCategory">
+    <fieldset>
+      <legend>Add New Category</legend>
+      <table>
+        <tr><td><label for="name">
+
+          name
+          <span *ngIf="name.errors?.required && name.touched">You must enter a name</span>
+          
+          </label></td>
+        <td><input id="name" formControlName="name" /></td></tr>
+        <tr><td><label for="amount">Amount
+          <span *ngIf="amount.errors?.isNumber">You must enter a number</span>
+          </label></td><td><input id="amount"formControlName="amount"  /></td></tr>
+        <tr><td>Is Recurring</td><td><input type="checkbox" formControlName="isRecurring" aria-label="Is Recurring" /></td></tr>
+      </table>
+    </fieldset>
+    <input type="button" id="btnAdd" value="Add" (click)="add()" />
+    </form>
 </div>
+{{addCategory.value |json}}

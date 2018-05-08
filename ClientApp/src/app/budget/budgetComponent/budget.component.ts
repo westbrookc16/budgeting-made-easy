@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { Budget } from '../classes/budget';
 import { HttpClient } from '@angular/common/http';
 import { BudgetService } from '../services/budget.service';
@@ -8,6 +9,7 @@ import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { AuthService } from '../../services/auth.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { isNumber } from 'util';
 @Component({
   selector: 'app-budget',
   templateUrl: './budget.component.html',
@@ -15,14 +17,27 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 })
 
 export class BudgetComponent implements OnInit {
+  validNumber(i: FormControl) {
+    if (!isNaN(+i.value)) {
+      return null;
+    }
+    else {
+      
+      return { isNumber: 'Must be a number' };
+    }
+  }
 
+  //getters for template
+  get totalIncome() {
+    return this.budgetForm.get('totalIncome');
+  }
   currBudget: Budget = new Budget();
   budgetForm: FormGroup;
   createForm() {
     this.budgetForm = this.fb.group({
       month: '',
       year: '',
-      totalIncome: '0',
+      totalIncome: ['0', [this.validNumber, Validators.required]]
     });
     console.log("form created");
   }
@@ -46,7 +61,7 @@ export class BudgetComponent implements OnInit {
 
     this.createForm();
     this.budgetService.currBudget$.subscribe(result => {
-      
+
 
       this.currBudget = result;
       //this.currBudget.totalLeftToBudget = this.currBudget.totalIncome - this.currBudget.totalSpent;

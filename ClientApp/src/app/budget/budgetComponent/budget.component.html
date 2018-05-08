@@ -37,7 +37,10 @@
       </tr>
       <tr><td>&nbsp;</td><td><input type="button" (click)="changeBudget()" value="Select" /></td></tr>
       <tr>
-      <td><label for="txtIncome">Total Monthly Income</label></td>
+      <td><label for="txtIncome">Total Monthly Income
+        <span *ngIf="totalIncome.errors?.isNumber">Must enter a number</span>
+        <span *ngIf="totalIncome.errors?.required">You must enter an income for the month</span>
+        </label></td>
       <td><input type="text" id="txtIncome" formControlName="totalIncome"  /></td></tr>
 
       <tr><td>Total  Budgeted</td><td>{{currBudget.totalSpent |currency}}</td></tr>
@@ -47,6 +50,7 @@
     <input type="button" id="btnAdd" value="Submit" (click)="add()" />
   </form>
   
+
     <app-budget-category></app-budget-category>
     <app-add-category></app-add-category>
 </div>
