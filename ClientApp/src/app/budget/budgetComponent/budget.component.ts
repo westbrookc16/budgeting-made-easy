@@ -59,7 +59,7 @@ export class BudgetComponent implements OnInit {
 
 
 
-    this.createForm();
+    
     this.budgetService.currBudget$.subscribe(result => {
 
 
