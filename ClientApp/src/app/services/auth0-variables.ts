@@ -12,5 +12,5 @@ export const AUTH_CONFIG: AuthConfig = {
   callbackURL: 'http://budgetingmadeeasy.azurewebsites.net/callback'
 };
 if (!environment.production) {
-  AUTH_CONFIG.callbackURL = 'http://localhost:50020/callback';
+  AUTH_CONFIG.callbackURL = 'https://localhost:44369/callback';
 }
