@@ -40,53 +40,16 @@ namespace budgetmanagementAngular
             // Automatically perform database migration
 //            services.BuildServiceProvider().GetService<DbContext>().Database.Migrate();
             services.AddAutoMapper();
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            // Add ASP.NET Identity support
-            /*services.AddIdentity<applicationUser, IdentityRole>(
-                opts =>
-                {
-                    opts.Password.RequireDigit = true;
-                    opts.Password.RequireLowercase = true;
-                    opts.Password.RequireUppercase = true;
-                    opts.Password.RequireNonAlphanumeric = false;
-                    opts.Password.RequiredLength = 7;
-                })
-                .AddEntityFrameworkStores<budgetContext>();
 
-            // Add Authentication with JWT Tokens
-            services.AddAuthentication(opts =>
-            {
-                opts.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(cfg =>
-            {
-                cfg.RequireHttpsMetadata = false;
-                cfg.SaveToken = true;
-                cfg.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    // standard configuration
-                    ValidIssuer = Configuration["Auth:Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:Key"])),
-                    ValidAudience = Configuration["Auth:Jwt:Audience"],
-                    ClockSkew = TimeSpan.Zero,
-
-                    // security switches
-                    RequireExpirationTime = true,
-                    ValidateIssuer = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidateAudience = true
-                };
-                cfg.IncludeErrorDetails = true;
-            });*/
+            
+            
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -110,7 +73,8 @@ namespace budgetmanagementAngular
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            app.UseHsts();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseAuthentication();

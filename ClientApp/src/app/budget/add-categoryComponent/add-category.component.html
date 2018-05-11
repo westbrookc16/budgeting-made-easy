@@ -3,21 +3,23 @@
   <form [formGroup]="addCategory">
     <fieldset>
       <legend>Add New Category</legend>
-      <table>
-        <tr><td><label for="name">
+      
+        <div class="form-group"><label for="name">
 
           name
           <span *ngIf="name.errors?.required && name.touched">You must enter a name</span>
+          </label>
           
-          </label></td>
-        <td><input id="name" formControlName="name" /></td></tr>
-        <tr><td><label for="amount">Amount
+        <input id="name" class="form-control" formControlName="name" /></div>
+        <div class="form-group"><label for="amount">Amount
           <span *ngIf="amount.errors?.isNumber">You must enter a number</span>
-          </label></td><td><input id="amount"formControlName="amount"  /></td></tr>
-        <tr><td>Is Recurring</td><td><input type="checkbox" formControlName="isRecurring" aria-label="Is Recurring" /></td></tr>
-      </table>
+          </label>
+      <input id="amount"formControlName="amount" class="form-control"  /></div>
+        <div class="form-group"><label for="chkIsRecurring">Is Recurring</label>
+<input type="checkbox" formControlName="isRecurring" aria-label="Is Recurring"id="chkIsRecurring" /></div>
+      
     </fieldset>
-    <input type="button" id="btnAdd" value="Add" (click)="add()" />
+    <input type="button" id="btnAdd" class="form-control" value="Add" (click)="add()" />
     </form>
 </div>
 
