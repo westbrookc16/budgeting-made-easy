@@ -39,10 +39,10 @@ export class BudgetComponent implements OnInit {
       year: '',
       totalIncome: ['0', [this.validNumber, Validators.required]]
     });
-    console.log("form created");
+    
   }
   constructor(private budgetService: BudgetService, private catService: CategoryService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private fb: FormBuilder) {
-    console.log("constructor.");
+
     this.createForm();
   }
   changeBudget() {
@@ -70,7 +70,7 @@ export class BudgetComponent implements OnInit {
     this.catService.deletedCategory$.subscribe(result => {
       this.currBudget.totalSpent -= result.amount;
       this.currBudget.totalLeftToBudget = this.currBudget.totalIncome - this.currBudget.totalSpent;
-      console.log("deleted category subscription");
+      
     });
     this.catService.difference$.subscribe(res => {
       this.currBudget.totalSpent = this.currBudget.totalSpent + res;
