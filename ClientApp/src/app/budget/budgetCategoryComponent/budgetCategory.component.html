@@ -9,7 +9,7 @@
     <tbody>
       <tr *ngFor="let i of categories">
         <td>{{i.name}}
-        <td><input type="number" title="{{i.name}}" [(ngModel)]="i.amount" /></td>
+        <td><input type="text" aria-label="{{i.name}}" [(ngModel)]="i.amount" /></td>
         <td><input type="checkbox" id="chkIsRecurring" title="Is Recurring" [(ngModel)]="i.isRecurring" /></td>
         <td><input type="button" (click)="edit(i)" value="Edit" /></td>
         <td><input type="button" value="Delete" (click)="deleteCategory(i)" /></td>
