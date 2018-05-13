@@ -21,7 +21,7 @@ export class BudgetService {
   }
   add(b: Budget) {
 
-    this.http.post<Budget>(this.baseUrl + 'api/budget/add', b).subscribe(res => {
+    this.http.post<Budget>(this.baseUrl + 'api/budget/add?id='+ +new Date(), b).subscribe(res => {
       this.currBudgetSource.next(res);
     });
       
