@@ -53,7 +53,7 @@ export class BudgetComponent implements OnInit {
     this.currBudget.totalIncome = this.budgetForm.get('totalIncome').value;
     this.budgetService.add(this.currBudget);
   }
-  profile: any;
+  
   ngOnInit() {
 
 
